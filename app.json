@@ -1,14 +1,16 @@
 {
   "expo": {
-    "name": "eregulation-mobile",
+    "name": "eRegulation",
     "slug": "eregulation-mobile",
-    "version": "1.0.0",
+    "privacy": "public",
+    "description": "Take control of your surroundings with eRegulation: Your smart solution for sensor regulation.",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
