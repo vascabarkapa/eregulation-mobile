@@ -5,51 +5,29 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as theme from './styles';
 
 export default {
-    'light': {
-        name: 'Light',
-        icon: ({ size, color, ...props }) => (
-            <MaterialCommunityIcons
-                size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
-                name="lightbulb-on-outline"
-                {...props}
-            />
-        ),
-    },
-    'ac': {
-        name: 'AC',
-        icon: ({ size, color, ...props }) => (
-            <MaterialCommunityIcons
-                size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
-                name="air-conditioner"
-                {...props}
-            />
-        ),
-    },
     'temperature': {
         name: 'Temperature',
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.accent}
-                name="temperature-celsius"
+                name="weather-sunny"
                 {...props}
             />
         ),
     },
-    'fan': {
-        name: 'Fan',
+    'humidity': {
+        name: 'Humidity',
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.accent}
-                name="fan"
+                name="water"
                 {...props}
             />
         ),
     },
-    'wi-fi': {
+    'wifi': {
         name: 'Wi-Fi',
         icon: ({ size, color, ...props }) => (
             <FontAwesome
@@ -60,13 +38,13 @@ export default {
             />
         ),
     },
-    'electricity': {
-        name: 'Electricity',
+    'settings': {
+        name: 'Settings',
         icon: ({ size, color, ...props }) => (
-            <MaterialIcons
+            <FontAwesome
                 size={size || theme.sizes.font}
                 color={color || theme.colors.accent}
-                name="power"
+                name="gear"
                 {...props}
             />
         ),

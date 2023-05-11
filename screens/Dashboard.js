@@ -8,15 +8,18 @@ import mocks from '../icons';
 class Dashboard extends Component {
     render() {
         const { navigation, settings } = this.props;
-        const LightIcon = settings['light'].icon;
-        const ACIcon = settings['ac'].icon;
-        const TempIcon = settings['temperature'].icon;
-        const FanIcon = settings['fan'].icon;
-        const WiFiIcon = settings['wi-fi'].icon;
-        const ElectricityIcon = settings['electricity'].icon;
+        
+        const TemperatureIcon = settings['temperature'].icon;
+        const HumidityIcon = settings['humidity'].icon;
+        const WiFiIcon = settings['wifi'].icon;
+        const SettingsIcon = settings['settings'].icon;
 
         return (
             <Block style={styles.dashboard}>
+                <Block row>
+                    <Text>Logo eReg</Text>
+                </Block>
+
                 <Block column style={{ marginVertical: theme.sizes.base * 2, }}>
                     <Text welcome>Good morning</Text>
                     <Text name>Test User</Text>
@@ -24,7 +27,7 @@ class Dashboard extends Component {
 
                 <Block row style={{ paddingVertical: 10 }}>
                     <Block flex={1.5} row style={{ alignItems: 'flex-end', }}>
-                        <Text h1>34</Text>
+                        <Text h1>28</Text>
                         <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
                     </Block>
                     <Block flex={1} column>
@@ -41,39 +44,7 @@ class Dashboard extends Component {
                                 onPress={() => navigation.navigate('Temperature', { name: 'light' })}
                             >
                                 <Block center middle style={styles.button}>
-                                    <LightIcon size={38} />
-                                    <Text
-                                        button
-                                        style={{ marginTop: theme.sizes.base * 0.5 }}
-                                    >
-                                        {settings['light'].name}
-                                    </Text>
-                                </Block>
-                            </TouchableOpacity>
-
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                onPress={() => navigation.navigate('Humidity', { name: 'ac' })}
-                            >
-                                <Block center middle style={styles.button}>
-                                    <ACIcon size={38} />
-                                    <Text
-                                        button
-                                        style={{ marginTop: theme.sizes.base * 0.5 }}
-                                    >
-                                        {settings['ac'].name}
-                                    </Text>
-                                </Block>
-                            </TouchableOpacity>
-                        </Block>
-
-                        <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
-                            <TouchableOpacity
-                                activeOpacity={0.8}
-                                onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
-                            >
-                                <Block center middle style={styles.button}>
-                                    <TempIcon size={38} />
+                                    <TemperatureIcon size={38} />
                                     <Text
                                         button
                                         style={{ marginTop: theme.sizes.base * 0.5 }}
@@ -85,15 +56,15 @@ class Dashboard extends Component {
 
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                onPress={() => navigation.navigate('Humidity', { name: 'fan' })}
+                                onPress={() => navigation.navigate('Humidity', { name: 'ac' })}
                             >
                                 <Block center middle style={styles.button}>
-                                    <FanIcon size={38} />
+                                    <HumidityIcon size={38} />
                                     <Text
                                         button
                                         style={{ marginTop: theme.sizes.base * 0.5 }}
                                     >
-                                        {settings['fan'].name}
+                                        {settings['humidity'].name}
                                     </Text>
                                 </Block>
                             </TouchableOpacity>
@@ -102,7 +73,7 @@ class Dashboard extends Component {
                         <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                onPress={() => navigation.navigate('Temperature', { name: 'wi-fi' })}
+                                onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
                             >
                                 <Block center middle style={styles.button}>
                                     <WiFiIcon size={38} />
@@ -110,22 +81,22 @@ class Dashboard extends Component {
                                         button
                                         style={{ marginTop: theme.sizes.base * 0.5 }}
                                     >
-                                        {settings['wi-fi'].name}
+                                        {settings['wifi'].name}
                                     </Text>
                                 </Block>
                             </TouchableOpacity>
 
                             <TouchableOpacity
                                 activeOpacity={0.8}
-                                onPress={() => navigation.navigate('Humidity', { name: 'electricity' })}
+                                onPress={() => navigation.navigate('Humidity', { name: 'fan' })}
                             >
                                 <Block center middle style={styles.button}>
-                                    <ElectricityIcon size={38} />
+                                    <SettingsIcon size={38} />
                                     <Text
                                         button
                                         style={{ marginTop: theme.sizes.base * 0.5 }}
                                     >
-                                        {settings['electricity'].name}
+                                        {settings['settings'].name}
                                     </Text>
                                 </Block>
                             </TouchableOpacity>
@@ -158,6 +129,6 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.button,
         width: 151,
         height: 151,
-        borderRadius: 151 / 2,
+        borderRadius: 150 / 10,
     }
 })
