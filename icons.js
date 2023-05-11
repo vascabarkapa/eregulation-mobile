@@ -11,7 +11,7 @@ export default {
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.accent}
-                name="weather-sunny"
+                name="white-balance-sunny"
                 {...props}
             />
         ),
