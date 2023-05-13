@@ -8,7 +8,7 @@ import mocks from '../icons';
 
 const redirectToStatistics = () => {
     Linking.openURL('https://eregulation.netlify.app');
-  }
+}
 
 class Dashboard extends Component {
     render() {
@@ -25,6 +25,8 @@ class Dashboard extends Component {
                 <Block style={styles.dashboard}>
                     <Block center>
                         <Image source={images.mainLogo} style={styles.image} />
+                        <Text weight='600' spacing={0.1}>Take control of your surroundings with eRegulation.</Text>
+                        <Text weight='600' spacing={0.1}>Your smart solution for sensor regulation.</Text>
                     </Block>
 
                     <Block column style={{ marginVertical: theme.sizes.base * 2, }}>
@@ -33,13 +35,13 @@ class Dashboard extends Component {
                     </Block>
 
                     <Block row style={{ paddingVertical: 10 }}>
-                        <Block flex={1.5} row style={{ alignItems: 'flex-end', }}>
+                        <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                             <Text h1>28</Text>
                             <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
                         </Block>
-                        <Block flex={1} column>
-                            <Text caption>Humidity</Text>
-                            <Text caption>Procenti</Text>
+                        <Block flex={1.5} row style={{ alignItems: 'flex-end', }}>
+                            <Text h1>48</Text>
+                            <Text h1 size={34} height={80} weight='600' spacing={0.1}>%</Text>
                         </Block>
                     </Block>
 
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     },
     image: {
         marginTop: theme.sizes.base,
-        marginBottom: theme.sizes.base,
+        marginBottom: theme.sizes.base * 2,
         width: '100%',
         height: 50,
         resizeMode: 'contain',
