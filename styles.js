@@ -6,13 +6,14 @@ const colors = {
     gray2: '#ECEDEF',
     button: '#482c43',
     background: '#d9b9c3',
+    darkRed: '#801737'
 };
 
 const sizes = {
     base: 14,
     font: 14,
-    welcome: 18,
-    name: 21,
+    welcome: 21,
+    name: 25,
     h1: 140,
     button: 16,
 };
@@ -20,7 +21,7 @@ const sizes = {
 const fonts = {
     welcome: {
         fontSize: sizes.welcome,
-        color: colors.gray,
+        color: colors.black,
         letterSpacing: -0.6,
         lineHeight: sizes.welcome + 4,
     },
