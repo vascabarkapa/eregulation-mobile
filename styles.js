@@ -4,7 +4,8 @@ const colors = {
     white: '#FFFFFF',
     gray: '#A7A7A7',
     gray2: '#ECEDEF',
-    button: '#F4F5F7',
+    button: '#482c43',
+    background: '#d9b9c3',
 };
 
 const sizes = {
