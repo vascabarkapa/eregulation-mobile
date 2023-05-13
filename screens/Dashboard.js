@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import * as theme from '../styles';
+import * as images from '../images';
 import { Block, Text } from '../components';
 import mocks from '../icons';
 
 class Dashboard extends Component {
     render() {
         const { navigation, settings } = this.props;
-        
+
         const TemperatureIcon = settings['temperature'].icon;
         const HumidityIcon = settings['humidity'].icon;
         const WiFiIcon = settings['wifi'].icon;
@@ -16,12 +17,12 @@ class Dashboard extends Component {
 
         return (
             <Block style={styles.dashboard}>
-                <Block row>
-                    <Text>Logo eReg</Text>
+                <Block center>
+                    <Image source={images.mainLogo} style={styles.image} />
                 </Block>
 
                 <Block column style={{ marginVertical: theme.sizes.base * 2, }}>
-                    <Text welcome>Good morning</Text>
+                    <Text welcome>Good afternoon</Text>
                     <Text name>Test User</Text>
                 </Block>
 
@@ -120,6 +121,13 @@ const styles = StyleSheet.create({
         padding: theme.sizes.base * 2,
         marginBottom: -theme.sizes.base * 6,
         marginTop: theme.sizes.base * 2,
+    },
+    image: {
+        marginTop: theme.sizes.base,
+        marginBottom: theme.sizes.base,
+        width: '100%',
+        height: 50,
+        resizeMode: 'contain'
     },
     buttons: {
         flex: 1,
