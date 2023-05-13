@@ -10,7 +10,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
+                color={color || theme.colors.background}
                 name="white-balance-sunny"
                 {...props}
             />
@@ -21,7 +21,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
+                color={color || theme.colors.background}
                 name="water"
                 {...props}
             />
@@ -32,7 +32,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <FontAwesome
                 size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
+                color={color || theme.colors.background}
                 name="wifi"
                 {...props}
             />
@@ -43,7 +43,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <FontAwesome
                 size={size || theme.sizes.font}
-                color={color || theme.colors.accent}
+                color={color || theme.colors.background}
                 name="gear"
                 {...props}
             />
