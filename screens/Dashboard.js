@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { Image, StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Image, StatusBar, StyleSheet, TouchableOpacity, View, Linking } from 'react-native';
 
 import * as theme from '../styles';
 import * as images from '../images';
 import { Block, Text } from '../components';
 import mocks from '../icons';
+
+const redirectToStatistics = () => {
+    Linking.openURL('https://eregulation.netlify.app');
+  }
 
 class Dashboard extends Component {
     render() {
@@ -12,7 +16,7 @@ class Dashboard extends Component {
 
         const TemperatureIcon = settings['temperature'].icon;
         const HumidityIcon = settings['humidity'].icon;
-        const WiFiIcon = settings['wifi'].icon;
+        const StatisticsIcon = settings['statistics'].icon;
         const SettingsIcon = settings['settings'].icon;
 
         return (
@@ -78,16 +82,16 @@ class Dashboard extends Component {
                             <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
+                                    onPress={redirectToStatistics}
                                 >
                                     <Block center middle style={styles.button}>
-                                        <WiFiIcon size={38} />
+                                        <StatisticsIcon size={38} />
                                         <Text
                                             button
                                             color={'background'}
                                             style={{ marginTop: theme.sizes.base * 0.5 }}
                                         >
-                                            {settings['wifi'].name}
+                                            {settings['statistics'].name}
                                         </Text>
                                     </Block>
                                 </TouchableOpacity>

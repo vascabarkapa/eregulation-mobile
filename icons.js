@@ -1,7 +1,5 @@
 import React from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import * as theme from './styles';
 
 export default {
@@ -27,13 +25,13 @@ export default {
             />
         ),
     },
-    'wifi': {
-        name: 'Wi-Fi',
+    'statistics': {
+        name: 'Statistics',
         icon: ({ size, color, ...props }) => (
-            <FontAwesome
+            <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.background}
-                name="wifi"
+                name="chart-bar"
                 {...props}
             />
         ),
@@ -41,10 +39,10 @@ export default {
     'settings': {
         name: 'Settings',
         icon: ({ size, color, ...props }) => (
-            <FontAwesome
+            <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.background}
-                name="gear"
+                name="cog"
                 {...props}
             />
         ),
