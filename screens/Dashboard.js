@@ -48,7 +48,7 @@ class Dashboard extends Component {
                             <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Temperature', { name: 'light' })}
+                                    onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
                                 >
                                     <Block center middle style={styles.button}>
                                         <TemperatureIcon size={38} />
@@ -64,7 +64,7 @@ class Dashboard extends Component {
 
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Humidity', { name: 'ac' })}
+                                    onPress={() => navigation.navigate('Humidity', { name: 'humidity' })}
                                 >
                                     <Block center middle style={styles.button}>
                                         <HumidityIcon size={38} />
@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Humidity', { name: 'fan' })}
+                                    onPress={() => navigation.navigate('Settings', { name: 'settings' })}
                                 >
                                     <Block center middle style={styles.button}>
                                         <SettingsIcon size={38} />
