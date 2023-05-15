@@ -12,8 +12,8 @@ const colors = {
 const sizes = {
     base: 14,
     font: 14,
-    welcome: 21,
-    name: 25,
+    welcome: 25,
+    name: 29,
     h1: 140,
     button: 16,
 };
