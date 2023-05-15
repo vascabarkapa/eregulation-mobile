@@ -4,6 +4,9 @@ export const lightLogo = require('./assets/light-logo.png');
 export const favicon = require('./assets/favicon.png');
 export const icon = require('./assets/icon.png');
 export const splash = require('./assets/splash.png');
+export const backgroundOpacity5 = require('./assets/background_5.png');
+export const backgroundOpacity15 = require('./assets/background_15.png');
+export const backgroundOpacity30 = require('./assets/background_30.png');
 
 export default {
     adaptiveIcon,
@@ -11,5 +14,8 @@ export default {
     lightLogo,
     favicon,
     icon,
-    splash
+    splash,
+    backgroundOpacity5,
+    backgroundOpacity15,
+    backgroundOpacity30
 }
