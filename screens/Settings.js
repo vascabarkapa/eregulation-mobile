@@ -1,11 +1,8 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ImageBackground,
-    Image,
     StyleSheet,
-    View,
     TextInput,
-    Button,
     TouchableOpacity
 } from 'react-native';
 
@@ -37,9 +34,9 @@ const Settings = ({ navigation, settings }) => {
                 <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
                     <Block style={styles.settingsPage}>
                         <Block center>
-                            <Text h2>Settings</Text>
+                            <Text h2 bold>Settings</Text>
                         </Block>
-                        <View style={styles.form}>
+                        <Block style={styles.form}>
                             <Text welcome bold>First Name</Text>
                             <TextInput
                                 style={styles.input}
@@ -60,29 +57,32 @@ const Settings = ({ navigation, settings }) => {
                             >
                                 <Block center middle>
                                     <Text
-                                        button
+                                        welcome
+                                        bold
                                         color={'background'}
                                     >
                                         Save Settings
                                     </Text>
                                 </Block>
                             </TouchableOpacity>
-                            <View style={styles.bottomButtonContainer}>
+                            <Block style={styles.bottomButtonContainer}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
                                 >
                                     <Block center middle>
                                         <Text
-                                            button
+                                            welcome
+                                            bold
                                             color={'background'}
                                         >
-                                            Open WiFi Settings
+                                            <SettingsIcon size={24} />
+                                            &nbsp;Open WiFi Settings
                                         </Text>
                                     </Block>
                                 </TouchableOpacity>
-                            </View>
-                        </View>
+                            </Block>
+                        </Block>
                     </Block>
                 </ImageBackground>
             </Block>
@@ -97,12 +97,6 @@ Settings.defaultProps = {
 export default Settings;
 
 const styles = StyleSheet.create({
-    settingsPage: {
-        flex: 1,
-        padding: theme.sizes.base * 2,
-        marginBottom: -theme.sizes.base * 6,
-        marginTop: theme.sizes.base * 3,
-    },
     container: {
         flex: 1,
     },
@@ -110,10 +104,17 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'cover',
     },
+    settingsPage: {
+        flex: 1,
+        padding: theme.sizes.base * 2,
+        marginBottom: -theme.sizes.base * 6,
+        marginTop: theme.sizes.base * 3,
+    },
     form: {
         flex: 1,
         padding: 10,
         alignItems: 'stretch',
+        marginTop: theme.sizes.base * 2
     },
     input: {
         width: '100%',
@@ -123,11 +124,8 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         fontSize: theme.sizes.welcome,
         marginTop: 5,
-        marginBottom: 15
-    },
-    label: {
-        fontSize: 18,
-        marginBottom: 5,
+        marginBottom: 15,
+        backgroundColor: theme.colors.background
     },
     bottomButtonContainer: {
         position: 'absolute',
