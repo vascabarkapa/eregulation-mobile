@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ImageBackground,
     Image,
@@ -8,11 +8,15 @@ import {
     View,
     Linking,
 } from 'react-native';
-
+import { useFocusEffect } from '@react-navigation/native';
+import { Block, Text } from '../components';
+import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
 import * as images from '../images';
-import { Block, Text } from '../components';
 import mocks from '../icons';
+
+const FILE_NAME = 'systemData.json';
+const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
 
 const redirectToStatistics = () => {
     Linking.openURL('https://eregulation.netlify.app');
@@ -30,12 +34,42 @@ const getGreeting = () => {
 };
 
 const Dashboard = ({ navigation, settings }) => {
-    const [greeting, setGreeting] = useState(getGreeting);
+    const greeting = getGreeting();
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
 
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
     const StatisticsIcon = settings['statistics'].icon;
     const SettingsIcon = settings['settings'].icon;
+
+    const checkDataFile = async () => {
+        const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
+
+        if (!fileInfo.exists) {
+            const initialData = {
+                first_name: 'New',
+                last_name: 'User',
+            };
+
+            const jsonString = JSON.stringify(initialData);
+            await FileSystem.writeAsStringAsync(FILE_PATH, jsonString);
+
+            const fileContent = await FileSystem.readAsStringAsync(FILE_PATH);
+            const jsonData = JSON.parse(fileContent);
+            setFirstName(jsonData.first_name);
+            setLastName(jsonData.last_name);
+        }
+
+        const fileContent = await FileSystem.readAsStringAsync(FILE_PATH);
+        const jsonData = JSON.parse(fileContent);
+        setFirstName(jsonData.first_name);
+        setLastName(jsonData.last_name);
+    };
+
+    useFocusEffect(() => {
+        checkDataFile();
+    });
 
     return (
         <Block style={styles.container}>
@@ -48,7 +82,7 @@ const Dashboard = ({ navigation, settings }) => {
 
                     <Block center column style={{ marginVertical: theme.sizes.base * 2, }}>
                         <Text welcome>{greeting}</Text>
-                        <Text name>{greeting && 'Test User'}</Text>
+                        <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
                     </Block>
 
                     <Block row style={{ paddingVertical: 10 }}>
