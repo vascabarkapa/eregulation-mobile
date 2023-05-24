@@ -98,6 +98,7 @@ const Settings = ({ navigation, settings }) => {
                                 activeOpacity={0.8}
                                 style={styles.button}
                                 onPress={handleSave}
+                                disabled={isSaving}
                             >
                                 <Block center middle>
                                     {isSaving ?
