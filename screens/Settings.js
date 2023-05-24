@@ -1,28 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import {
+    ActivityIndicator,
     ImageBackground,
     KeyboardAvoidingView,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Keyboard,
 } from 'react-native';
 import { Linking } from 'react-native';
-
+import { Block, Text } from '../components';
+import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
 import * as images from '../images';
-import { Block, Text } from '../components';
 import mocks from '../icons';
+
+const FILE_NAME = 'systemData.json';
+const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
 
 const Settings = ({ navigation, settings }) => {
     const SettingsIcon = settings['settings'].icon;
 
+    const [isSaving, setIsSaving] = useState(false);
+    const [btnSaveLabel, setBtnSaveLabel] = useState('Save Settings');
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
 
-    const handleSave = () => {
-        // Handle the save button functionality here
-        console.log('Input 1:', input1);
-        console.log('Input 2:', input2);
+    const loadData = async () => {
+        const fileContent = await FileSystem.readAsStringAsync(FILE_PATH);
+        const jsonData = JSON.parse(fileContent);
+        setFirstName(jsonData.first_name);
+        setLastName(jsonData.last_name);
+    };
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const handleSave = async () => {
+        Keyboard.dismiss();
+        setIsSaving(true);
+
+        const jsonContent = {
+            first_name: firstName,
+            last_name: lastName
+        };
+
+        const jsonString = JSON.stringify(jsonContent);
+        await FileSystem.writeAsStringAsync(FILE_PATH, jsonString);
+
+        setTimeout(() => {
+            setIsSaving(false);
+            setBtnSaveLabel('Saved Successfuly');
+            setTimeout(() => {
+                setBtnSaveLabel('Save Settings');
+            }, 1000);
+        }, 500);
     };
 
     const handleOpenWiFiSettings = () => {
@@ -63,15 +97,20 @@ const Settings = ({ navigation, settings }) => {
                             <TouchableOpacity
                                 activeOpacity={0.8}
                                 style={styles.button}
+                                onPress={handleSave}
                             >
                                 <Block center middle>
-                                    <Text
-                                        welcome
-                                        bold
-                                        color={'background'}
-                                    >
-                                        Save Settings
-                                    </Text>
+                                    {isSaving ?
+                                        <ActivityIndicator color="#d9b9c3" />
+                                        :
+                                        <Text
+                                            welcome
+                                            bold
+                                            color={'background'}
+                                        >
+                                            {btnSaveLabel}
+                                        </Text>
+                                    }
                                 </Block>
                             </TouchableOpacity>
                             <Block style={styles.bottomButtonContainer}>
