@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {
     ImageBackground,
+    KeyboardAvoidingView,
     StyleSheet,
     TextInput,
     TouchableOpacity
@@ -29,7 +30,11 @@ const Settings = ({ navigation, settings }) => {
     };
 
     return (
-        <>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            enabled={false}
+            style={styles.container}
+        >
             <Block style={styles.container}>
                 <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
                     <Block style={styles.settingsPage}>
@@ -86,7 +91,7 @@ const Settings = ({ navigation, settings }) => {
                     </Block>
                 </ImageBackground>
             </Block>
-        </>
+        </KeyboardAvoidingView>
     );
 };
 
