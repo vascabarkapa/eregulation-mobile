@@ -6,6 +6,7 @@ import {
     TextInput,
     TouchableOpacity
 } from 'react-native';
+import { Linking } from 'react-native';
 
 import * as theme from '../styles';
 import * as images from '../images';
@@ -24,9 +25,12 @@ const Settings = ({ navigation, settings }) => {
         console.log('Input 2:', input2);
     };
 
-    const handleGoToWiFi = () => {
-        // Handle the "Go To WiFi" button functionality here
-        console.log('Navigating to WiFi settings...');
+    const handleOpenWiFiSettings = () => {
+        if (Platform.OS === 'ios') {
+            Linking.openURL('app-settings:');
+        } else {
+            Linking.sendIntent('android.settings.WIFI_SETTINGS');
+        }
     };
 
     return (
@@ -74,6 +78,7 @@ const Settings = ({ navigation, settings }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
+                                    onPress={handleOpenWiFiSettings}
                                 >
                                     <Block center middle>
                                         <Text
