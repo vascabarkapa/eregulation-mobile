@@ -20,7 +20,10 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
                     <StatusBar translucent={true} backgroundColor="transparent" />
-                    <Block style={styles.dashboard}>
+                    <Block style={styles.temperaturePage}>
+                        <Block center>
+                            <Text h2 bold>Temperature</Text>
+                        </Block>
                     </Block>
                 </ImageBackground>
             </Block>
@@ -31,7 +34,7 @@ const Temperature = ({ navigation, settings }) => {
 export default Temperature;
 
 const styles = StyleSheet.create({
-    dashboard: {
+    temperaturePage: {
         flex: 1,
         padding: theme.sizes.base * 2,
         marginBottom: -theme.sizes.base * 6,

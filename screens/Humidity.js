@@ -20,7 +20,10 @@ const Humidity = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
                     <StatusBar translucent={true} backgroundColor="transparent" />
-                    <Block style={styles.dashboard}>
+                    <Block style={styles.humidityPage}>
+                        <Block center>
+                            <Text h2 bold>Humidity</Text>
+                        </Block>
                     </Block>
                 </ImageBackground>
             </Block>
@@ -31,7 +34,7 @@ const Humidity = ({ navigation, settings }) => {
 export default Humidity;
 
 const styles = StyleSheet.create({
-    dashboard: {
+    humidityPage: {
         flex: 1,
         padding: theme.sizes.base * 2,
         marginBottom: -theme.sizes.base * 6,
