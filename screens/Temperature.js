@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     ImageBackground,
     KeyboardAvoidingView,
@@ -10,24 +10,22 @@ import * as theme from '../styles';
 import * as images from '../images';
 import { Block, Text } from '../components';
 
-class Temperature extends Component {
-    render() {
-        return (
-            <KeyboardAvoidingView
-                behavior={Platform.OS === "ios" ? "padding" : "height"}
-                enabled={false}
-                style={styles.container}
-            >
-                <Block style={styles.container}>
-                    <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
-                        <StatusBar translucent={true} backgroundColor="transparent" />
-                        <Block style={styles.dashboard}>
-                        </Block>
-                    </ImageBackground>
-                </Block>
-            </KeyboardAvoidingView>
-        )
-    }
+const Temperature = ({ navigation, settings }) => {
+    return (
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            enabled={false}
+            style={styles.container}
+        >
+            <Block style={styles.container}>
+                <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
+                    <StatusBar translucent={true} backgroundColor="transparent" />
+                    <Block style={styles.dashboard}>
+                    </Block>
+                </ImageBackground>
+            </Block>
+        </KeyboardAvoidingView>
+    )
 }
 
 export default Temperature;
