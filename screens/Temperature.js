@@ -100,6 +100,7 @@ const Temperature = ({ navigation, settings }) => {
                                     <Text welcome bold color="black">{minTemperature}°C</Text>
                                 </Block>
                                 <Slider
+                                    style={styles.slider}
                                     value={minTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
@@ -117,6 +118,7 @@ const Temperature = ({ navigation, settings }) => {
                                     <Text welcome bold color="black">{maxTemperature}°C</Text>
                                 </Block>
                                 <Slider
+                                    style={styles.slider}
                                     value={maxTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
@@ -177,6 +179,9 @@ const styles = StyleSheet.create({
     },
     switch: {
         transform: [{ scaleX: 2 }, { scaleY: 2 }],
+    },
+    slider: {
+        transform: [{ scaleX: 1 }, { scaleY: 1.6 }],
     },
     bottomButtonContainer: {
         position: 'absolute',
