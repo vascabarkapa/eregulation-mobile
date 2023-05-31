@@ -133,6 +133,7 @@ const Temperature = ({ navigation, settings }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
+                                    onPress={() => navigation.navigate('Dashboard')}
                                 >
                                     <Block center middle>
                                         <Text
