@@ -62,7 +62,7 @@ const Temperature = ({ navigation, settings }) => {
                                 />
                             </Block>
                         </Block>
-                        <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
+                        {isTurnedOn ? <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
                             <Block center>
                                 <Text name bold>Adjust the Temperature range</Text>
                             </Block>
@@ -116,7 +116,7 @@ const Temperature = ({ navigation, settings }) => {
                                     </Block>
                                 </TouchableOpacity>
                             </Block>
-                        </Block>
+                        </Block> : ''}
                     </Block>
                 </ImageBackground>
             </Block>
