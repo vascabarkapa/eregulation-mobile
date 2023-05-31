@@ -12,6 +12,7 @@ export default class Typography extends Component {
             height,
             weight,
             spacing,
+            live,
             h1,
             h2,
             welcome,
@@ -29,6 +30,7 @@ export default class Typography extends Component {
 
         const textStyles = [
             styles.text,
+            live && styles.live,
             h1 && styles.h1,
             h2 && styles.h2,
             welcome && styles.welcome,
@@ -75,6 +77,7 @@ const styles = StyleSheet.create({
     background: { color: theme.colors.background, },
     welcome: theme.fonts.welcome,
     name: theme.fonts.name,
+    live: theme.fonts.live,
     h1: theme.fonts.h1,
     h2: theme.fonts.h2,
     button: theme.fonts.button,

@@ -14,6 +14,7 @@ const sizes = {
     font: 14,
     welcome: 25,
     name: 29,
+    live: 180,
     h1: 140,
     h2: 70,
     button: 16,
@@ -38,6 +39,12 @@ const fonts = {
         color: colors.gray,
         letterSpacing: -0.6,
         lineHeight: sizes.welcome + 4,
+    },
+    live: {
+        fontSize: sizes.live,
+        color: colors.black,
+        letterSpacing: -10,
+        lineHeight: sizes.live,
     },
     h1: {
         fontSize: sizes.h1,

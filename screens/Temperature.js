@@ -48,8 +48,8 @@ const Temperature = ({ navigation, settings }) => {
                         </Block>
                         <Block row style={{ paddingVertical: 50 }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                                <Text h1>28</Text>
-                                <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
+                                <Text live>28</Text>
+                                <Text h1 size={50} height={90} weight='600' spacing={0.1}>°C</Text>
                             </Block>
                             <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
                                 <Text welcome>Turned <Text welcome bold style={styles.label}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
@@ -117,7 +117,6 @@ const Temperature = ({ navigation, settings }) => {
                                 </TouchableOpacity>
                             </Block>
                         </Block>
-
                     </Block>
                 </ImageBackground>
             </Block>
