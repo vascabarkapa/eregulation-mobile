@@ -1,19 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, View } from 'react-native';
 import {
     ImageBackground,
     KeyboardAvoidingView,
     StatusBar,
     StyleSheet,
+    Switch,
+    TouchableOpacity,
 } from 'react-native';
 
 import * as theme from '../styles';
 import * as images from '../images';
+import mocks from '../icons';
 import { Block, Text } from '../components';
 import Slider from '@react-native-community/slider';
 
 const Humidity = ({ navigation, settings }) => {
-    const [minHumidity, setMinHumidity] = useState(20);
-    const [maxHumidity, setMaxHumidity] = useState(40);
+    const HumidityIcon = settings['humidity'].icon;
+
+    const [isTurnedOn, setIsTurnedOn] = useState(false);
+    const [minHumidity, setMinHumidity] = useState(40);
+    const [maxHumidity, setMaxHumidity] = useState(60);
+
+    const opacityValue = useRef(new Animated.Value(1)).current;
+
+    useEffect(() => {
+        const animate = () => {
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(opacityValue, {
+                        toValue: 0,
+                        duration: 400,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                    Animated.timing(opacityValue, {
+                        toValue: 1,
+                        duration: 400,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                ]),
+            ).start();
+        };
+
+        animate();
+    }, [opacityValue]);
 
     const handleMinHumiditySliderChange = (value) => {
         setMinHumidity(Math.floor(value));
@@ -23,6 +55,10 @@ const Humidity = ({ navigation, settings }) => {
         setMaxHumidity(Math.floor(value));
     };
 
+    const turnOnOffHumidity = (value) => {
+        setIsTurnedOn(value => !value);
+    };
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -30,19 +66,44 @@ const Humidity = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
+                    <View style={styles.bottomIconContainer}>
+                        <HumidityIcon size={450} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
+                    </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.humidityPage}>
                         <Block center>
-                            <Text h2 bold>Humidity</Text>
+                            <Text h2 bold style={!isTurnedOn && { color: theme.colors.background }}>Humidity</Text>
                         </Block>
-                        <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
+                        <Block row style={{ paddingVertical: 50 }}>
+                            <Block flex={2} row style={{ alignItems: 'flex-end', }}>
+                                <Text live style={!isTurnedOn && { color: theme.colors.background }}>48</Text>
+                                <Animated.View style={{ opacity: opacityValue }}>
+                                    <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>%</Text>
+                                </Animated.View>
+                            </Block>
+                            <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
+                                <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                                <Switch
+                                    trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
+                                    thumbColor={isTurnedOn ? theme.colors.button : theme.colors.gray2}
+                                    value={isTurnedOn}
+                                    onChange={turnOnOffHumidity}
+                                    style={styles.switch}
+                                />
+                            </Block>
+                        </Block>
+                        {isTurnedOn ? <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
+                            <Block center>
+                                <Text name bold>Adjust the Humidity range</Text>
+                            </Block>
                             <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MIN</Text>
                                     <Text welcome bold color="black">{minHumidity}%</Text>
                                 </Block>
                                 <Slider
+                                    style={styles.slider}
                                     value={minHumidity}
                                     minimumValue={0}
                                     maximumValue={100}
@@ -60,6 +121,7 @@ const Humidity = ({ navigation, settings }) => {
                                     <Text welcome bold color="black">{maxHumidity}%</Text>
                                 </Block>
                                 <Slider
+                                    style={styles.slider}
                                     value={maxHumidity}
                                     minimumValue={0}
                                     maximumValue={100}
@@ -71,13 +133,35 @@ const Humidity = ({ navigation, settings }) => {
                                     step={1}
                                 />
                             </Block>
-                        </Block>
+                            <Block style={styles.bottomButtonContainer}>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.button}
+                                    onPress={() => navigation.navigate('Dashboard')}
+                                >
+                                    <Block center middle>
+                                        <Text
+                                            welcome
+                                            bold
+                                            color={'background'}
+                                        >
+                                            Save changes
+                                        </Text>
+                                    </Block>
+                                </TouchableOpacity>
+                            </Block>
+                        </Block> : ''}
                     </Block>
                 </ImageBackground>
             </Block>
         </KeyboardAvoidingView>
     )
 }
+
+Humidity.defaultProps = {
+    settings: mocks,
+};
+
 
 export default Humidity;
 
@@ -90,9 +174,36 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: theme.colors.button
     },
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
+    },
+    switch: {
+        transform: [{ scaleX: 2 }, { scaleY: 2 }],
+    },
+    slider: {
+        transform: [{ scaleX: 1 }, { scaleY: 1.6 }],
+    },
+    bottomButtonContainer: {
+        position: 'absolute',
+        bottom: 100,
+        left: 0,
+        right: 0,
+        paddingHorizontal: 10,
+    },
+    button: {
+        marginTop: theme.sizes.base * 0.5,
+        backgroundColor: theme.colors.button,
+        width: '100%',
+        padding: theme.sizes.base,
+        borderRadius: theme.sizes.base / 2,
+        textAlign: 'center'
+    },
+    bottomIconContainer: {
+        position: 'absolute',
+        bottom: -80,
+        right: -80,
     },
 })

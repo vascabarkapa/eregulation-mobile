@@ -68,7 +68,7 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <TemperatureIcon size={400} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
+                        <TemperatureIcon size={450} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
