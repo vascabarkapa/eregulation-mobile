@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
 import {
     ImageBackground,
     KeyboardAvoidingView,
@@ -16,7 +16,7 @@ import { Block, Text } from '../components';
 import Slider from '@react-native-community/slider';
 
 const Temperature = ({ navigation, settings }) => {
-    const SettingsIcon = settings['settings'].icon;
+    const TemperatureIcon = settings['temperature'].icon;
 
     const [isTurnedOn, setIsTurnedOn] = useState(false);
     const [minTemperature, setMinTemperature] = useState(18);
@@ -67,6 +67,9 @@ const Temperature = ({ navigation, settings }) => {
         >
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
+                    <View style={styles.bottomIconContainer}>
+                        <TemperatureIcon size={400} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
+                    </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
@@ -197,5 +200,10 @@ const styles = StyleSheet.create({
         padding: theme.sizes.base,
         borderRadius: theme.sizes.base / 2,
         textAlign: 'center'
+    },
+    bottomIconContainer: {
+        position: 'absolute',
+        bottom: -80,
+        right: -80,
     },
 })
