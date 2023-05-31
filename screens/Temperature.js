@@ -51,10 +51,10 @@ const Temperature = ({ navigation, settings }) => {
                                 <Text h1>28</Text>
                                 <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
                             </Block>
-                            <Block flex={1.5} style={{ alignItems: 'flex-start', }}>
-                                <Text welcome style={styles.label}>Turned <Text welcome bold style={styles.label}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                            <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
+                                <Text welcome>Turned <Text welcome bold style={styles.label}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
-                                    trackColor={{ false: theme.colors.gray, true: theme.colors.background }}
+                                    trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
                                     thumbColor={isTurnedOn ? theme.colors.button : theme.colors.gray2}
                                     value={isTurnedOn}
                                     onChange={turnOnOffTemperature}
@@ -148,9 +148,6 @@ const styles = StyleSheet.create({
     },
     switch: {
         transform: [{ scaleX: 2 }, { scaleY: 2 }],
-    },
-    label: {
-        marginRight: 10,
     },
     bottomButtonContainer: {
         position: 'absolute',
