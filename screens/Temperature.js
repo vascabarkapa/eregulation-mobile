@@ -76,7 +76,6 @@ const Temperature = ({ navigation, settings }) => {
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                                 <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
-                                    {/* Your component content here */}
                                     <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
                                 </Animated.View>
                             </Block>
