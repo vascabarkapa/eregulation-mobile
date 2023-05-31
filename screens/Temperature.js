@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing } from 'react-native';
 import {
     ImageBackground,
     KeyboardAvoidingView,
@@ -40,7 +41,7 @@ const Temperature = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={isTurnedOn && images.backgroundOpacity15} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
