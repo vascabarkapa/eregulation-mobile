@@ -40,19 +40,19 @@ const Temperature = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOn && images.backgroundOpacity15} style={styles.backgroundImage}>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
-                            <Text h2 bold>Temperature</Text>
+                            <Text h2 bold style={!isTurnedOn && { color: theme.colors.background }}>Temperature</Text>
                         </Block>
                         <Block row style={{ paddingVertical: 50 }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                                <Text live>28</Text>
-                                <Text h1 size={50} height={90} weight='600' spacing={0.1}>°C</Text>
+                                <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
+                                <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
                             </Block>
                             <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
-                                <Text welcome>Turned <Text welcome bold style={styles.label}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                                <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
                                     trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
                                     thumbColor={isTurnedOn ? theme.colors.button : theme.colors.gray2}
@@ -140,6 +140,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        backgroundColor: theme.colors.button
     },
     backgroundImage: {
         flex: 1,
