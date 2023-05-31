@@ -4,14 +4,20 @@ import {
     KeyboardAvoidingView,
     StatusBar,
     StyleSheet,
+    Switch,
+    TouchableOpacity,
 } from 'react-native';
 
 import * as theme from '../styles';
 import * as images from '../images';
+import mocks from '../icons';
 import { Block, Text } from '../components';
 import Slider from '@react-native-community/slider';
 
 const Temperature = ({ navigation, settings }) => {
+    const SettingsIcon = settings['settings'].icon;
+
+    const [isTurnedOn, setIsTurnedOn] = useState(false);
     const [minTemperature, setMinTemperature] = useState(18);
     const [maxTemperature, setMaxTemperature] = useState(24);
 
@@ -21,6 +27,10 @@ const Temperature = ({ navigation, settings }) => {
 
     const handleMaxTemperatureSliderChange = (value) => {
         setMaxTemperature(Math.floor(value));
+    };
+
+    const turnOnOffTemperature = (value) => {
+        setIsTurnedOn(value => !value);
     };
 
     return (
@@ -36,7 +46,26 @@ const Temperature = ({ navigation, settings }) => {
                         <Block center>
                             <Text h2 bold>Temperature</Text>
                         </Block>
+                        <Block row style={{ paddingVertical: 50 }}>
+                            <Block flex={2} row style={{ alignItems: 'flex-end', }}>
+                                <Text h1>28</Text>
+                                <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
+                            </Block>
+                            <Block flex={1.5} style={{ alignItems: 'flex-start', }}>
+                                <Text welcome style={styles.label}>Turned <Text welcome bold style={styles.label}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                                <Switch
+                                    trackColor={{ false: theme.colors.gray, true: theme.colors.background }}
+                                    thumbColor={isTurnedOn ? theme.colors.button : theme.colors.gray2}
+                                    value={isTurnedOn}
+                                    onChange={turnOnOffTemperature}
+                                    style={styles.switch}
+                                />
+                            </Block>
+                        </Block>
                         <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
+                            <Block center>
+                                <Text name bold>Adjust the Temperature range</Text>
+                            </Block>
                             <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MIN</Text>
@@ -44,7 +73,7 @@ const Temperature = ({ navigation, settings }) => {
                                 </Block>
                                 <Slider
                                     value={minTemperature}
-                                    minimumValue={-16}
+                                    minimumValue={12}
                                     maximumValue={36}
                                     thumbTintColor={theme.colors.button}
                                     minimumTrackTintColor={theme.colors.button}
@@ -61,7 +90,7 @@ const Temperature = ({ navigation, settings }) => {
                                 </Block>
                                 <Slider
                                     value={maxTemperature}
-                                    minimumValue={-16}
+                                    minimumValue={12}
                                     maximumValue={36}
                                     thumbTintColor={theme.colors.button}
                                     minimumTrackTintColor={theme.colors.button}
@@ -71,13 +100,35 @@ const Temperature = ({ navigation, settings }) => {
                                     step={1}
                                 />
                             </Block>
+                            <Block style={styles.bottomButtonContainer}>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={styles.button}
+                                >
+                                    <Block center middle>
+                                        <Text
+                                            welcome
+                                            bold
+                                            color={'background'}
+                                        >
+                                            Save changes
+                                        </Text>
+                                    </Block>
+                                </TouchableOpacity>
+                            </Block>
                         </Block>
+
                     </Block>
                 </ImageBackground>
             </Block>
         </KeyboardAvoidingView>
     )
 }
+
+Temperature.defaultProps = {
+    settings: mocks,
+};
+
 
 export default Temperature;
 
@@ -94,5 +145,26 @@ const styles = StyleSheet.create({
     backgroundImage: {
         flex: 1,
         resizeMode: 'cover',
+    },
+    switch: {
+        transform: [{ scaleX: 2 }, { scaleY: 2 }],
+    },
+    label: {
+        marginRight: 10,
+    },
+    bottomButtonContainer: {
+        position: 'absolute',
+        bottom: 100,
+        left: 0,
+        right: 0,
+        paddingHorizontal: 10,
+    },
+    button: {
+        marginTop: theme.sizes.base * 0.5,
+        backgroundColor: theme.colors.button,
+        width: '100%',
+        padding: theme.sizes.base,
+        borderRadius: theme.sizes.base / 2,
+        textAlign: 'center'
     },
 })
