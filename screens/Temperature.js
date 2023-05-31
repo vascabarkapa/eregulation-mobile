@@ -22,6 +22,31 @@ const Temperature = ({ navigation, settings }) => {
     const [minTemperature, setMinTemperature] = useState(18);
     const [maxTemperature, setMaxTemperature] = useState(24);
 
+    const opacityValue = useRef(new Animated.Value(1)).current;
+
+    useEffect(() => {
+        const animate = () => {
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(opacityValue, {
+                        toValue: 0,
+                        duration: 400,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                    Animated.timing(opacityValue, {
+                        toValue: 1,
+                        duration: 400,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                ]),
+            ).start();
+        };
+
+        animate();
+    }, [opacityValue]);
+
     const handleMinTemperatureSliderChange = (value) => {
         setMinTemperature(Math.floor(value));
     };
@@ -50,7 +75,10 @@ const Temperature = ({ navigation, settings }) => {
                         <Block row style={{ paddingVertical: 50 }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                                 <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
-                                <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
+                                <Animated.View style={{ opacity: opacityValue }}>
+                                    {/* Your component content here */}
+                                    <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
+                                </Animated.View>
                             </Block>
                             <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
                                 <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
