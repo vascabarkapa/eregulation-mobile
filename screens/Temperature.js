@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
+import Slider from '@react-native-community/slider';
 import {
     ImageBackground,
     KeyboardAvoidingView,
@@ -8,12 +9,14 @@ import {
     Switch,
     TouchableOpacity,
 } from 'react-native';
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+} from "react-native-responsive-dimensions";
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
-import Slider from '@react-native-community/slider';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
@@ -68,21 +71,21 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <TemperatureIcon size={450} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
+                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
                             <Text h2 bold style={!isTurnedOn && { color: theme.colors.background }}>Temperature</Text>
                         </Block>
-                        <Block row style={{ paddingVertical: 50 }}>
+                        <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                                 <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={50} height={90} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
+                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
                                 </Animated.View>
                             </Block>
-                            <Block flex={1.5} style={{ alignItems: 'center', marginTop: 15 }}>
+                            <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(2.5) }}>
                                 <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
                                     trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
@@ -93,11 +96,11 @@ const Temperature = ({ navigation, settings }) => {
                                 />
                             </Block>
                         </Block>
-                        {isTurnedOn ? <Block flex={1} style={{ paddingTop: theme.sizes.base * 2 }}>
+                        {isTurnedOn ? <Block flex={1} style={{ paddingTop: responsiveHeight(1) }}>
                             <Block center>
                                 <Text name bold>Adjust the Temperature range</Text>
                             </Block>
-                            <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
+                            <Block column style={{ marginVertical: responsiveHeight(3) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MIN</Text>
                                     <Text welcome bold color="black">{minTemperature}°C</Text>
@@ -115,7 +118,7 @@ const Temperature = ({ navigation, settings }) => {
                                     step={1}
                                 />
                             </Block>
-                            <Block column style={{ marginVertical: theme.sizes.base * 2 }}>
+                            <Block column style={{ marginVertical: responsiveHeight(1) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MAX</Text>
                                     <Text welcome bold color="black">{maxTemperature}°C</Text>
@@ -168,9 +171,9 @@ export default Temperature;
 const styles = StyleSheet.create({
     temperaturePage: {
         flex: 1,
-        padding: theme.sizes.base * 2,
-        marginBottom: -theme.sizes.base * 6,
-        marginTop: theme.sizes.base * 3,
+        padding: responsiveHeight(3.5),
+        marginBottom: -responsiveHeight(10),
+        marginTop: responsiveHeight(5),
     },
     container: {
         flex: 1,
@@ -183,27 +186,24 @@ const styles = StyleSheet.create({
     switch: {
         transform: [{ scaleX: 2 }, { scaleY: 2 }],
     },
-    slider: {
-        transform: [{ scaleX: 1 }, { scaleY: 1.6 }],
-    },
     bottomButtonContainer: {
         position: 'absolute',
-        bottom: 100,
+        bottom: responsiveHeight(12),
         left: 0,
         right: 0,
-        paddingHorizontal: 10,
+        paddingHorizontal: responsiveHeight(1.5),
     },
     button: {
-        marginTop: theme.sizes.base * 0.5,
+        marginTop: responsiveHeight(1),
         backgroundColor: theme.colors.button,
         width: '100%',
         padding: theme.sizes.base,
-        borderRadius: theme.sizes.base / 2,
+        borderRadius: responsiveHeight(1.5) / 2,
         textAlign: 'center'
     },
     bottomIconContainer: {
         position: 'absolute',
-        bottom: -80,
-        right: -80,
+        bottom: -responsiveHeight(5),
+        right: -responsiveWidth(25),
     },
 })

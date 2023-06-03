@@ -84,8 +84,19 @@ const styles = StyleSheet.create({
         letterSpacing: -0.6,
         lineHeight: responsiveFontSize(3) + 4,
     },
-    name: theme.fonts.name,
-    live: theme.fonts.live,
+    name: {
+        fontSize: responsiveFontSize(4),
+        fontWeight: '600',
+        color: theme.colors.black,
+        letterSpacing: -1.1,
+        lineHeight: responsiveFontSize(4.5),
+    },
+    live: {
+        fontSize: responsiveFontSize(20),
+        color: theme.colors.black,
+        letterSpacing: -10,
+        lineHeight: responsiveFontSize(20),
+    },
     h1: {
         fontSize: responsiveFontSize(13),
         color: theme.colors.black,
