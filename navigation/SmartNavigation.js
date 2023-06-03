@@ -12,8 +12,8 @@ export default function SmartNavigation() {
     return (
         <Stack.Navigator initialRouteName="Dashboard">
             <Stack.Screen name="Dashboard" component={Dashboard} options={{ headerShown: false }} />
-            <Stack.Screen name="Temperature" component={Temperature} options={{ headerShown: false }}/>
-            <Stack.Screen name="Humidity" component={Humidity} options={{ headerShown: false }}/>
+            <Stack.Screen name="Temperature" component={Temperature} options={{ headerShown: false }} />
+            <Stack.Screen name="Humidity" component={Humidity} options={{ headerShown: false }} />
             <Stack.Screen name="Settings" component={Settings} options={{ headerShown: false }} />
         </Stack.Navigator>
     );
