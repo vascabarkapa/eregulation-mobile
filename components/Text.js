@@ -8,7 +8,7 @@ import {
     responsiveHeight,
     responsiveWidth,
     responsiveFontSize
-  } from "react-native-responsive-dimensions";
+} from "react-native-responsive-dimensions";
 
 const windowWidth = Dimensions.get('window').width;
 const baseFontSize = 18; // Define a base font size

@@ -8,6 +8,10 @@ import {
     View,
     Linking
 } from 'react-native';
+import {
+    responsiveHeight,
+    responsiveWidth,
+} from "react-native-responsive-dimensions";
 import { useFocusEffect } from '@react-navigation/native';
 import { Block, Text } from '../components';
 import * as FileSystem from 'expo-file-system';
@@ -80,15 +84,15 @@ const Dashboard = ({ navigation, settings }) => {
                         <Image source={images.mainLogo} style={styles.logo} />
                     </Block>
 
-                    <Block center column style={{ marginVertical: theme.sizes.base * 2, }}>
+                    <Block center column style={{ marginVertical: responsiveHeight(3.5) }}>
                         <Text welcome>{greeting}</Text>
                         <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
                     </Block>
 
-                    <Block row style={{ paddingVertical: 10, marginHorizontal: 10 }}>
+                    <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
                         <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                             <Text h1>28</Text>
-                            <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
+                            <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
                         </Block>
                         <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
                             <Text h1>48</Text>
@@ -98,7 +102,7 @@ const Dashboard = ({ navigation, settings }) => {
 
                     <View contentContainerStyle={styles.buttons} showsVerticalScrollIndicator={false}>
                         <Block column space="between">
-                            <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
+                            <Block row space="around" style={{ marginVertical: responsiveHeight(2) }}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
@@ -108,7 +112,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <Text
                                             button
                                             color={'background'}
-                                            style={{ marginTop: theme.sizes.base * 0.5 }}
+                                            style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['temperature'].name}
                                         </Text>
@@ -124,7 +128,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <Text
                                             button
                                             color={'background'}
-                                            style={{ marginTop: theme.sizes.base * 0.5 }}
+                                            style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['humidity'].name}
                                         </Text>
@@ -132,7 +136,7 @@ const Dashboard = ({ navigation, settings }) => {
                                 </TouchableOpacity>
                             </Block>
 
-                            <Block row space="around" style={{ marginVertical: theme.sizes.base }}>
+                            <Block row space="around" style={{ marginVertical: responsiveHeight(1) }}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     onPress={redirectToStatistics}
@@ -142,7 +146,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <Text
                                             button
                                             color={'background'}
-                                            style={{ marginTop: theme.sizes.base * 0.5 }}
+                                            style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['statistics'].name}
                                         </Text>
@@ -158,7 +162,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <Text
                                             button
                                             color={'background'}
-                                            style={{ marginTop: theme.sizes.base * 0.5 }}
+                                            style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['settings'].name}
                                         </Text>
@@ -182,14 +186,14 @@ export default Dashboard;
 const styles = StyleSheet.create({
     dashboard: {
         flex: 1,
-        padding: '7%',
-        marginTop: '11%',
+        padding: responsiveHeight(3),
+        marginTop: responsiveHeight(5),
     },
     logo: {
-        marginTop: '4%',
-        marginBottom: '8%',
+        marginTop: responsiveHeight(3),
+        marginBottom: responsiveHeight(3),
         width: '100%',
-        height: 50,
+        height: responsiveHeight(6),
         resizeMode: 'contain',
     },
     buttons: {
@@ -197,9 +201,9 @@ const styles = StyleSheet.create({
     },
     button: {
         backgroundColor: theme.colors.button,
-        width: 151,
-        height: 151,
-        borderRadius: 150 / 10,
+        width: responsiveWidth(38),
+        height: responsiveWidth(38),
+        borderRadius: responsiveWidth(38) / 10,
     },
     container: {
         flex: 1,
