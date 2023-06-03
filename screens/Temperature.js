@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     switch: {
+        marginTop: responsiveHeight(0.5),
         transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
     },
     bottomButtonContainer: {
