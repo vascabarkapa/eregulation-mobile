@@ -92,10 +92,10 @@ const styles = StyleSheet.create({
         lineHeight: responsiveFontSize(4.5),
     },
     live: {
-        fontSize: responsiveFontSize(20),
+        fontSize: responsiveFontSize(15),
         color: theme.colors.black,
         letterSpacing: -10,
-        lineHeight: responsiveFontSize(20),
+        lineHeight: responsiveFontSize(15),
     },
     h1: {
         fontSize: responsiveFontSize(13),

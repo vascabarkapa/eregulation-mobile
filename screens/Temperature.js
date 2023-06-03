@@ -85,7 +85,7 @@ const Temperature = ({ navigation, settings }) => {
                                     <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
                                 </Animated.View>
                             </Block>
-                            <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(2.5) }}>
+                            <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
                                 <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
                                     trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
@@ -98,7 +98,7 @@ const Temperature = ({ navigation, settings }) => {
                         </Block>
                         {isTurnedOn ? <Block flex={1} style={{ paddingTop: responsiveHeight(1) }}>
                             <Block center>
-                                <Text name bold>Adjust the Temperature range</Text>
+                                <Text welcome bold>Adjust the Temperature range</Text>
                             </Block>
                             <Block column style={{ marginVertical: responsiveHeight(3) }}>
                                 <Block row space="between">
@@ -184,7 +184,7 @@ const styles = StyleSheet.create({
         resizeMode: 'cover',
     },
     switch: {
-        transform: [{ scaleX: 2 }, { scaleY: 2 }],
+        transform: [{ scaleX: 1.5 }, { scaleY: 1.5 }],
     },
     bottomButtonContainer: {
         position: 'absolute',
