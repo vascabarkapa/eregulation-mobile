@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text } from 'react-native'
-import * as theme from '../styles';
-
-import { Dimensions } from 'react-native';
-
 import {
     responsiveHeight,
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
-
-const windowWidth = Dimensions.get('window').width;
-const baseFontSize = 18; // Define a base font size
-
-const scaleFactor = windowWidth / 375; // Adjust the scale factor according to your design
-
-const scaledFontSize = Math.round(baseFontSize * scaleFactor);
+import * as theme from '../styles';
 
 export default class Typography extends Component {
     render() {
