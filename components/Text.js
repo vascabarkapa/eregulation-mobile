@@ -4,6 +4,12 @@ import * as theme from '../styles';
 
 import { Dimensions } from 'react-native';
 
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+  } from "react-native-responsive-dimensions";
+
 const windowWidth = Dimensions.get('window').width;
 const baseFontSize = 18; // Define a base font size
 
@@ -88,10 +94,10 @@ const styles = StyleSheet.create({
     name: theme.fonts.name,
     live: theme.fonts.live,
     h1: {
-        fontSize: Math.round(theme.sizes.h1 * scaleFactor),
+        fontSize: responsiveFontSize(15),
         color: theme.colors.black,
         letterSpacing: -10,
-        lineHeight: Math.round(theme.sizes.h1 * scaleFactor),
+        lineHeight: responsiveFontSize(15),
     },
     h2: theme.fonts.h2,
     button: theme.fonts.button,
