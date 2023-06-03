@@ -8,6 +8,10 @@ import {
     TouchableOpacity,
     Keyboard,
 } from 'react-native';
+import {
+    responsiveHeight,
+    responsiveWidth,
+} from "react-native-responsive-dimensions";
 import { Linking } from 'react-native';
 import { Block, Text } from '../components';
 import * as FileSystem from 'expo-file-system';
@@ -156,40 +160,40 @@ const styles = StyleSheet.create({
     },
     settingsPage: {
         flex: 1,
-        padding: theme.sizes.base * 2,
-        marginBottom: -theme.sizes.base * 6,
-        marginTop: theme.sizes.base * 3,
+        padding: responsiveHeight(3),
+        marginBottom: -responsiveHeight(10),
+        marginTop: responsiveHeight(5),
     },
     form: {
         flex: 1,
-        padding: 10,
+        padding: responsiveHeight(1.2),
         alignItems: 'stretch',
-        marginTop: theme.sizes.base * 2
+        marginTop: responsiveHeight(3.5)
     },
     input: {
         width: '100%',
-        padding: 10,
+        padding: responsiveHeight(1.2),
         borderWidth: 2,
         borderColor: theme.colors.button,
         borderRadius: 5,
         fontSize: theme.sizes.welcome,
-        marginTop: 5,
-        marginBottom: 15,
+        marginTop: responsiveHeight(0.5),
+        marginBottom: responsiveHeight(2),
         backgroundColor: theme.colors.background
     },
     bottomButtonContainer: {
         position: 'absolute',
-        bottom: 100,
+        bottom: responsiveHeight(12),
         left: 0,
         right: 0,
-        paddingHorizontal: 10,
+        paddingHorizontal: responsiveHeight(1.5),
     },
     button: {
-        marginTop: theme.sizes.base * 0.5,
+        marginTop: responsiveHeight(1),
         backgroundColor: theme.colors.button,
         width: '100%',
         padding: theme.sizes.base,
-        borderRadius: theme.sizes.base / 2,
+        borderRadius: responsiveHeight(1.5) / 2,
         textAlign: 'center'
     },
 })
