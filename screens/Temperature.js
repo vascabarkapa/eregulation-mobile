@@ -79,10 +79,10 @@ const Temperature = ({ navigation, settings }) => {
                             <Text h2 bold style={!isTurnedOn && { color: theme.colors.background }}>Temperature</Text>
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
-                            <Block flex={2} row style={{ alignItems: 'flex-end', }}>
+                            <Block flex={2} row style={{ alignItems: 'flex-end' }}>
                                 <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-1} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
+                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
                                 </Animated.View>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
