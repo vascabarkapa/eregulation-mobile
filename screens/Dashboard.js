@@ -6,7 +6,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     View,
-    Linking,
+    Linking
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { Block, Text } from '../components';
@@ -85,12 +85,12 @@ const Dashboard = ({ navigation, settings }) => {
                         <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
                     </Block>
 
-                    <Block row style={{ paddingVertical: 10 }}>
+                    <Block row style={{ paddingVertical: 10, marginHorizontal: 10 }}>
                         <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                             <Text h1>28</Text>
                             <Text h1 size={34} height={80} weight='600' spacing={0.1}>°C</Text>
                         </Block>
-                        <Block flex={1.5} row style={{ alignItems: 'flex-end', }}>
+                        <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
                             <Text h1>48</Text>
                             <Text h1 size={34} height={80} weight='600' spacing={0.1}>%</Text>
                         </Block>
@@ -182,20 +182,18 @@ export default Dashboard;
 const styles = StyleSheet.create({
     dashboard: {
         flex: 1,
-        padding: theme.sizes.base * 2,
-        marginBottom: -theme.sizes.base * 6,
-        marginTop: theme.sizes.base * 3,
+        padding: '7%',
+        marginTop: '11%',
     },
     logo: {
-        marginTop: theme.sizes.base,
-        marginBottom: theme.sizes.base * 2,
+        marginTop: '4%',
+        marginBottom: '8%',
         width: '100%',
         height: 50,
         resizeMode: 'contain',
     },
     buttons: {
         flex: 1,
-        marginBottom: -theme.sizes.base * 6,
     },
     button: {
         backgroundColor: theme.colors.button,
