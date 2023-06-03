@@ -15,7 +15,7 @@ const sizes = {
     welcome: 25,
     name: 29,
     live: 180,
-    h1: 140,
+    h1: 120,
     h2: 70,
     button: 16,
 };
