@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import {
-    responsiveHeight,
-    responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 import * as theme from '../styles';
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
         lineHeight: responsiveFontSize(13),
     },
     h2: {
-        fontSize: responsiveFontSize(8),
+        fontSize: responsiveFontSize(6.5),
         color: theme.colors.black,
         letterSpacing: -3,
         lineHeight: responsiveFontSize(8),
