@@ -18,6 +18,7 @@ import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
+import LiveDot from '../components/LiveDot';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
@@ -92,11 +93,17 @@ const Dashboard = ({ navigation, settings }) => {
                     <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
                         <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                             <Text h1>28</Text>
-                            <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
+                            <Block column>
+                                <LiveDot />
+                                <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
+                            </Block>
                         </Block>
                         <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
                             <Text h1>48</Text>
-                            <Text h1 size={34} height={80} weight='600' spacing={0.1}>%</Text>
+                            <Block column>
+                                <LiveDot />
+                                <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
+                            </Block>
                         </Block>
                     </Block>
 
