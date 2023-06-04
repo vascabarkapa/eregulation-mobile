@@ -71,7 +71,7 @@ const Humidity = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <HumidityIcon size={responsiveHeight(55)} color={isTurnedOn ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        <HumidityIcon size={responsiveHeight(70)} color={isTurnedOn ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.humidityPage}>
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     },
     bottomIconContainer: {
         position: 'absolute',
-        bottom: -responsiveHeight(10),
-        right: -responsiveWidth(25),
+        bottom: -responsiveHeight(15),
+        right: -responsiveWidth(15),
     },
 })
