@@ -111,7 +111,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <TemperatureIcon size={38} />
                                         <Text
                                             button
-                                            color={'background'}
+                                            color={'secondary'}
                                             style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['temperature'].name}
@@ -127,7 +127,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <HumidityIcon size={38} />
                                         <Text
                                             button
-                                            color={'background'}
+                                            color={'secondary'}
                                             style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['humidity'].name}
@@ -145,7 +145,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <StatisticsIcon size={38} />
                                         <Text
                                             button
-                                            color={'background'}
+                                            color={'secondary'}
                                             style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['statistics'].name}
@@ -161,7 +161,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         <SettingsIcon size={38} />
                                         <Text
                                             button
-                                            color={'background'}
+                                            color={'secondary'}
                                             style={{ marginTop: responsiveHeight(1) }}
                                         >
                                             {settings['settings'].name}
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     button: {
-        backgroundColor: theme.colors.button,
+        backgroundColor: theme.colors.primary,
         width: responsiveWidth(38),
         height: responsiveWidth(38),
         borderRadius: responsiveWidth(38) / 10,

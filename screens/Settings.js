@@ -111,7 +111,7 @@ const Settings = ({ navigation, settings }) => {
                                         <Text
                                             welcome
                                             bold
-                                            color={'background'}
+                                            color={'secondary'}
                                         >
                                             {btnSaveLabel}
                                         </Text>
@@ -128,7 +128,7 @@ const Settings = ({ navigation, settings }) => {
                                         <Text
                                             welcome
                                             bold
-                                            color={'background'}
+                                            color={'secondary'}
                                         >
                                             <SettingsIcon size={24} />
                                             &nbsp;Open WiFi Settings
@@ -174,12 +174,12 @@ const styles = StyleSheet.create({
         width: '100%',
         padding: responsiveHeight(1.2),
         borderWidth: 2,
-        borderColor: theme.colors.button,
+        borderColor: theme.colors.primary,
         borderRadius: 5,
         fontSize: theme.sizes.welcome,
         marginTop: responsiveHeight(0.5),
         marginBottom: responsiveHeight(2),
-        backgroundColor: theme.colors.background
+        backgroundColor: theme.colors.secondary
     },
     bottomButtonContainer: {
         position: 'absolute',
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: responsiveHeight(1),
-        backgroundColor: theme.colors.button,
+        backgroundColor: theme.colors.primary,
         width: '100%',
         padding: theme.sizes.base,
         borderRadius: responsiveHeight(1.5) / 2,

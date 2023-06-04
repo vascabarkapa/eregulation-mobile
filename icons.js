@@ -8,7 +8,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.background}
+                color={color || theme.colors.secondary}
                 name="white-balance-sunny"
                 {...props}
             />
@@ -19,7 +19,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.background}
+                color={color || theme.colors.secondary}
                 name="water"
                 {...props}
             />
@@ -30,7 +30,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.background}
+                color={color || theme.colors.secondary}
                 name="chart-bar"
                 {...props}
             />
@@ -41,7 +41,7 @@ export default {
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
-                color={color || theme.colors.background}
+                color={color || theme.colors.secondary}
                 name="cog"
                 {...props}
             />

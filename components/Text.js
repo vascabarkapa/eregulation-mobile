@@ -46,7 +46,8 @@ export default class Typography extends Component {
             color && color === 'black' && styles.black,
             color && color === 'white' && styles.white,
             color && color === 'gray' && styles.gray,
-            color && color === 'background' && styles.background,
+            color && color === 'secondary' && styles.secondary,
+            color && color === 'primary' && styles.primary,
             size && { fontSize: size },
             bold && styles.bold,
             light && styles.light,
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     black: { color: theme.colors.black },
     white: { color: theme.colors.white },
     gray: { color: theme.colors.gray },
-    background: { color: theme.colors.background },
+    secondary: { color: theme.colors.secondary },
     welcome: {
         fontSize: responsiveFontSize(3),
         color: theme.colors.black,
@@ -109,6 +110,17 @@ const styles = StyleSheet.create({
         letterSpacing: -3,
         lineHeight: responsiveFontSize(8),
     },
-    button: theme.fonts.button,
-    caption: theme.fonts.caption,
+    button: {
+        fontSize: theme.sizes.button,
+        color: theme.colors.black,
+        fontWeight: '600',
+        letterSpacing: -0.4,
+        lineHeight: theme.sizes.button + 4,
+    },
+    caption: {
+        fontSize: theme.sizes.welcome,
+        color: theme.colors.gray,
+        letterSpacing: -0.6,
+        lineHeight: theme.sizes.welcome + 4,
+    },
 });

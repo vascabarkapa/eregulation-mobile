@@ -71,25 +71,25 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOn ? theme.colors.button : theme.colors.background} opacity={0.2} />
+                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOn ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
-                            <Text h2 bold style={!isTurnedOn && { color: theme.colors.background }}>Temperature</Text>
+                            <Text h2 bold style={!isTurnedOn && { color: theme.colors.secondary }}>Temperature</Text>
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOn && { color: theme.colors.background }}>28</Text>
+                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>28</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOn && { color: theme.colors.background }}>°C</Text>
+                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOn && { color: theme.colors.secondary }}>°C</Text>
                                 </Animated.View>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
-                                <Text welcome style={!isTurnedOn && { color: theme.colors.background }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.background }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                                <Text welcome style={!isTurnedOn && { color: theme.colors.secondary }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.secondary }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
-                                    trackColor={{ false: theme.colors.gray, true: theme.colors.button }}
-                                    thumbColor={isTurnedOn ? theme.colors.button : theme.colors.gray2}
+                                    trackColor={{ false: theme.colors.gray, true: theme.colors.primary }}
+                                    thumbColor={isTurnedOn ? theme.colors.primary : theme.colors.gray2}
                                     value={isTurnedOn}
                                     onChange={turnOnOffTemperature}
                                     style={styles.switch}
@@ -110,8 +110,8 @@ const Temperature = ({ navigation, settings }) => {
                                     value={minTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
-                                    thumbTintColor={theme.colors.button}
-                                    minimumTrackTintColor={theme.colors.button}
+                                    thumbTintColor={theme.colors.primary}
+                                    minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMinTemperatureSliderChange}
                                     upperLimit={maxTemperature - 1}
@@ -128,8 +128,8 @@ const Temperature = ({ navigation, settings }) => {
                                     value={maxTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
-                                    thumbTintColor={theme.colors.button}
-                                    minimumTrackTintColor={theme.colors.button}
+                                    thumbTintColor={theme.colors.primary}
+                                    minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMaxTemperatureSliderChange}
                                     lowerLimit={minTemperature + 1}
@@ -146,7 +146,7 @@ const Temperature = ({ navigation, settings }) => {
                                         <Text
                                             welcome
                                             bold
-                                            color={'background'}
+                                            color={'secondary'}
                                         >
                                             Save changes
                                         </Text>
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: theme.colors.button
+        backgroundColor: theme.colors.primary
     },
     backgroundImage: {
         flex: 1,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: responsiveHeight(1),
-        backgroundColor: theme.colors.button,
+        backgroundColor: theme.colors.primary,
         width: '100%',
         padding: theme.sizes.base,
         borderRadius: responsiveHeight(1.5) / 2,
