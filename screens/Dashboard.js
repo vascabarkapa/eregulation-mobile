@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     ImageBackground,
     Image,
@@ -19,6 +19,7 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import LiveDot from '../components/LiveDot';
+import MQTTClient from '../components/MqttClient';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
@@ -47,6 +48,22 @@ const Dashboard = ({ navigation, settings }) => {
     const HumidityIcon = settings['humidity'].icon;
     const StatisticsIcon = settings['statistics'].icon;
     const SettingsIcon = settings['settings'].icon;
+
+    const [messages, setMessages] = useState([]);
+
+    useEffect(() => {
+      const mqttClient = new MQTTClient('eregulation-embedded', onMessageReceived);
+      mqttClient.connect();
+  
+      return () => {
+        mqttClient.disconnect();
+      };
+    }, []);
+  
+    const onMessageReceived = (message) => {
+        console.log(message);
+      setMessages((prevMessages) => [...prevMessages, message]);
+    };
 
     const checkDataFile = async () => {
         const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
