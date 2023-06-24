@@ -44,8 +44,8 @@ const Dashboard = ({ navigation, settings }) => {
     const greeting = getGreeting();
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
-    const [temperature, setTemperature] = useState(null);
-    const [humidity, setHumidity] = useState(null);
+    const [temperature, setTemperature] = useState(0);
+    const [humidity, setHumidity] = useState(0);
 
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
