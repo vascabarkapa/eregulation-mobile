@@ -1,54 +1,65 @@
-import { Client } from 'paho-mqtt';
-
-
-const mqttHost = 'broker.hivemq.com'; // Replace with your MQTT broker host
-const mqttPort = Number(8000); // Replace with the appropriate port for your MQTT broker
+import { Client, Message } from 'paho-mqtt';
 
 class MQTTClient {
-  constructor(topic, onMessageReceived) {
-    this.client = new Client(mqttHost, mqttPort, 'clientId-' + Math.random().toString(36).substring(7));
-    this.topic = topic;
-    this.onMessageReceived = onMessageReceived;
-    this.client.onConnectionLost = this.onConnectionLost;
-    this.client.onMessageArrived = this.onMessageArrived;
+  constructor() {
+    this.client = new Client('e3a0ad2ab69842fbb684a383f2306b47.s2.eu.hivemq.cloud', 8884, 'clientId' + Math.random(1, 1000));
+    this.client.onConnectionLost = this.onConnectionLost.bind(this);
+    this.client.onMessageArrived = this.onMessageArrived.bind(this);
+    this.isConnected = false;
   }
 
-  connect() {
-    this.client.connect({
-      onSuccess: this.onConnect,
-      onFailure: this.onConnectFailure,
-    });
+  connect(username, password) {
+    const options = {
+      userName: username,
+      password: password,
+      useSSL: true,
+      onSuccess: this.onConnect.bind(this),
+      onFailure: this.onConnectionFailed.bind(this),
+    };
+
+    this.client.connect(options);
   }
 
   disconnect() {
-    this.client.disconnect();
+    if (this.isConnected) {
+      this.client.disconnect();
+    }
   }
 
-  onConnect = () => {
-    console.log('Connected to MQTT broker');
-    this.client.subscribe(this.topic);
-  };
+  onConnect() {
+    console.log('Connected to HiveMQ Cloud');
+    this.isConnected = true;
 
-  onConnectFailure = (error) => {
-    console.log('Failed to connect to MQTT broker:', error);
-  };
+    // Subscribe to a topic after connecting
+    this.client.subscribe('eregulation');
+  }
 
-  onConnectionLost = (responseObject) => {
+  onConnectionLost(responseObject) {
     if (responseObject.errorCode !== 0) {
       console.log('Connection lost:', responseObject.errorMessage);
     }
-  };
+    this.isConnected = false;
+  }
 
-  onMessageArrived = (message) => {
-    const payload = message.payloadString;
-    console.log('Message received:', payload);
-    this.onMessageReceived(payload);
-  };
+  onConnectionFailed(responseObject) {
+    console.log('Connection failed:', responseObject.errorMessage);
+    this.isConnected = false;
+  }
 
-  publishMessage(message) {
-    const mqttMessage = new window.Paho.MQTT.Message(message);
-    mqttMessage.destinationName = this.topic;
-    this.client.send(mqttMessage);
+  onMessageArrived(message) {
+    console.log('Received message:', message.payloadString);
+    // Process the received message here
+    return message.payloadString;
+  }
+
+  sendMessage(topic, payload) {
+    if (this.isConnected) {
+      const message = new Message(payload);
+      message.destinationName = topic;
+      this.client.send(message);
+    } else {
+      console.log('Not connected to HiveMQ Cloud');
+    }
   }
 }
 
