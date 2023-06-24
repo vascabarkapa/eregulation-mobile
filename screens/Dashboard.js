@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     ImageBackground,
     Image,
@@ -19,7 +19,8 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import LiveDot from '../components/LiveDot';
-import MQTTClient from '../components/MqttClient';
+import MqttService from '../services/MqttService';
+import Regex from '../helpers/Regex';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
@@ -43,6 +44,8 @@ const Dashboard = ({ navigation, settings }) => {
     const greeting = getGreeting();
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
+    const [temperature, setTemperature] = useState(null);
+    const [humidity, setHumidity] = useState(null);
 
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
@@ -77,6 +80,39 @@ const Dashboard = ({ navigation, settings }) => {
         checkDataFile();
     });
 
+    useEffect(() => {
+        MqttService.connect(
+            () => {
+                console.log('MQTT connected');
+                MqttService.subscribe('eregulation', onMessageArrived);
+            },
+            (error) => {
+                console.error('MQTT connection failed:', error);
+            }
+        );
+
+        return () => {
+            MqttService.unsubscribe('eregulation');
+            MqttService.client.disconnect();
+        };
+    }, []);
+
+    const onMessageArrived = (message) => {
+        const liveDataRegex = /^t-\d+-h-\d+$/;
+
+        console.log('Received message:', message.payloadString);
+        if (liveDataRegex.test(message.payloadString)) {
+            const parsedLiveData = Regex.parseLiveTemperatureAndHumidity(message.payloadString);
+            setTemperature(parsedLiveData.temperature);
+            setHumidity(parsedLiveData.humidity);
+        }
+    };
+
+    const sendMessage = () => {
+        const message = 'Hello, MQTT!';
+        MqttService.send('eregulation', message);
+    };
+
     return (
         <Block style={styles.container}>
             <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
@@ -93,14 +129,14 @@ const Dashboard = ({ navigation, settings }) => {
 
                     <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
                         <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                            <Text h1>28</Text>
+                            <Text h1>{temperature}</Text>
                             <Block column>
                                 <LiveDot />
                                 <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
                             </Block>
                         </Block>
                         <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
-                            <Text h1>48</Text>
+                            <Text h1>{humidity}</Text>
                             <Block column>
                                 <LiveDot />
                                 <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
