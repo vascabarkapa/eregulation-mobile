@@ -19,6 +19,7 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import LiveDot from '../components/LiveDot';
+import MQTTClient from '../components/MqttClient';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
