@@ -70,6 +70,13 @@ const Humidity = ({ navigation, settings }) => {
         setIsTurnedOnHumidityRegulation(value => !value);
     };
 
+    const saveHumidityRange = () => {
+        setMinHumidity(tempMinHumidity);
+        setTempMinHumidity(tempMinHumidity);
+        setMaxHumidity(tempMaxHumidity);
+        setTempMaxHumidity(tempMaxHumidity);
+    }
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -148,7 +155,7 @@ const Humidity = ({ navigation, settings }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
-                                    onPress={() => navigation.navigate('Dashboard')}
+                                    onPress={saveHumidityRange}
                                 >
                                     <Block center middle>
                                         <Text
