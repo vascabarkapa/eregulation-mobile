@@ -25,6 +25,9 @@ const Temperature = ({ navigation, settings }) => {
     const [isTurnedOn, setIsTurnedOn] = useState(false);
     const opacityValue = useRef(new Animated.Value(1)).current;
 
+    const [tempMinTemperature, setTempMinTemperature] = useState(18);
+    const [tempMaxTemperature, setTempMaxTemperature] = useState(24);
+
     useEffect(() => {
         const animate = () => {
             Animated.loop(
@@ -49,11 +52,11 @@ const Temperature = ({ navigation, settings }) => {
     }, [opacityValue]);
 
     const handleMinTemperatureSliderChange = (value) => {
-        setMinTemperature(Math.floor(value));
+        setTempMinTemperature(Math.floor(value));
     };
 
     const handleMaxTemperatureSliderChange = (value) => {
-        setMaxTemperature(Math.floor(value));
+        setTempMaxTemperature(Math.floor(value));
     };
 
     const turnOnOffTemperature = (value) => {
@@ -101,40 +104,40 @@ const Temperature = ({ navigation, settings }) => {
                             <Block column style={{ marginVertical: responsiveHeight(3) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MIN</Text>
-                                    <Text welcome bold color="black">{minTemperature}°C</Text>
+                                    <Text welcome bold color="black">{tempMinTemperature}°C</Text>
                                 </Block>
                                 <Slider
                                     style={styles.slider}
-                                    value={minTemperature}
+                                    value={tempMinTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMinTemperatureSliderChange}
-                                    upperLimit={maxTemperature - 1}
+                                    upperLimit={tempMaxTemperature - 1}
                                     step={1}
                                 />
                             </Block>
                             <Block column style={{ marginVertical: responsiveHeight(1) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MAX</Text>
-                                    <Text welcome bold color="black">{maxTemperature}°C</Text>
+                                    <Text welcome bold color="black">{tempMaxTemperature}°C</Text>
                                 </Block>
                                 <Slider
                                     style={styles.slider}
-                                    value={maxTemperature}
+                                    value={tempMaxTemperature}
                                     minimumValue={12}
                                     maximumValue={36}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMaxTemperatureSliderChange}
-                                    lowerLimit={minTemperature + 1}
+                                    lowerLimit={tempMinTemperature + 1}
                                     step={1}
                                 />
                             </Block>
-                            <Block style={styles.bottomButtonContainer}>
+                            {(tempMaxTemperature !== maxTemperature || tempMinTemperature !== minTemperature) ? <Block style={styles.bottomButtonContainer}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
@@ -150,7 +153,7 @@ const Temperature = ({ navigation, settings }) => {
                                         </Text>
                                     </Block>
                                 </TouchableOpacity>
-                            </Block>
+                            </Block> : ''}
                         </Block> : ''}
                     </Block>
                 </ImageBackground>

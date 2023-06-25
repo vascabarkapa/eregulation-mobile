@@ -25,6 +25,9 @@ const Humidity = ({ navigation, settings }) => {
     const [isTurnedOn, setIsTurnedOn] = useState(false);
     const opacityValue = useRef(new Animated.Value(1)).current;
 
+    const [tempMinHumidity, setTempMinHumidity] = useState(minHumidity);
+    const [tempMaxHumidity, setTempMaxHumidity] = useState(maxHumidity);
+
     useEffect(() => {
         const animate = () => {
             Animated.loop(
@@ -49,11 +52,11 @@ const Humidity = ({ navigation, settings }) => {
     }, [opacityValue]);
 
     const handleMinHumiditySliderChange = (value) => {
-        setMinHumidity(Math.floor(value));
+        setTempMinHumidity(Math.floor(value));
     };
 
     const handleMaxHumiditySliderChange = (value) => {
-        setMaxHumidity(Math.floor(value));
+        setTempMaxHumidity(Math.floor(value));
     };
 
     const turnOnOffHumidity = (value) => {
@@ -101,40 +104,40 @@ const Humidity = ({ navigation, settings }) => {
                             <Block column style={{ marginVertical: responsiveHeight(3) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MIN</Text>
-                                    <Text welcome bold color="black">{minHumidity}%</Text>
+                                    <Text welcome bold color="black">{tempMinHumidity}%</Text>
                                 </Block>
                                 <Slider
                                     style={styles.slider}
-                                    value={minHumidity}
+                                    value={tempMinHumidity}
                                     minimumValue={0}
                                     maximumValue={100}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMinHumiditySliderChange}
-                                    upperLimit={maxHumidity - 1}
+                                    upperLimit={tempMaxHumidity - 1}
                                     step={1}
                                 />
                             </Block>
                             <Block column style={{ marginVertical: responsiveHeight(1) }}>
                                 <Block row space="between">
                                     <Text welcome color="black">MAX</Text>
-                                    <Text welcome bold color="black">{maxHumidity}%</Text>
+                                    <Text welcome bold color="black">{tempMaxHumidity}%</Text>
                                 </Block>
                                 <Slider
                                     style={styles.slider}
-                                    value={maxHumidity}
+                                    value={tempMaxHumidity}
                                     minimumValue={0}
                                     maximumValue={100}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
                                     onValueChange={handleMaxHumiditySliderChange}
-                                    lowerLimit={minHumidity + 1}
+                                    lowerLimit={tempMinHumidity + 1}
                                     step={1}
                                 />
                             </Block>
-                            <Block style={styles.bottomButtonContainer}>
+                            {(tempMaxHumidity !== maxHumidity || tempMinHumidity !== minHumidity) ? <Block style={styles.bottomButtonContainer}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
@@ -150,7 +153,7 @@ const Humidity = ({ navigation, settings }) => {
                                         </Text>
                                     </Block>
                                 </TouchableOpacity>
-                            </Block>
+                            </Block> : ''}
                         </Block> : ''}
                     </Block>
                 </ImageBackground>
