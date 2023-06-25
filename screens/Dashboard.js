@@ -86,6 +86,7 @@ const Dashboard = ({ navigation, settings }) => {
             () => {
                 console.log('MQTT connected');
                 MqttService.subscribe('eregulation', onMessageArrived);
+                MqttService.send('eregulation', 'ping');
             },
             (error) => {
                 console.error('MQTT connection failed:', error);
@@ -107,11 +108,6 @@ const Dashboard = ({ navigation, settings }) => {
             setLiveTemperature(parsedLiveData.temperature);
             setLiveHumidity(parsedLiveData.humidity);
         }
-    };
-
-    const sendMessage = () => {
-        const message = 'Hello, MQTT!';
-        MqttService.send('eregulation', message);
     };
 
     return (
