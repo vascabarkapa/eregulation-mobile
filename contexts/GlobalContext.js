@@ -12,8 +12,8 @@ export const GlobalProvider = ({ children }) => {
     const [minHumidity, setMinHumidity] = useState(40);
     const [maxHumidity, setMaxHumidity] = useState(60);
 
-    const [isTurnedOnTemperatureRegulation, setIsTurnedOnTemperatureRegulation] = useState(false);
-    const [isTurnedOnHumidityRegulation, setIsTurnedOnHumidityRegulation] = useState(false);
+    const [isTurnedOnTemperatureRegulation, setIsTurnedOnTemperatureRegulation] = useState(null);
+    const [isTurnedOnHumidityRegulation, setIsTurnedOnHumidityRegulation] = useState(null);
 
 
     return (
