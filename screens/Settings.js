@@ -24,7 +24,7 @@ const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
 
 const Settings = ({ navigation, settings }) => {
-    const SettingsIcon = settings['settings'].icon;
+    const WiFiIcon = settings['wifi'].icon;
 
     const [isSaving, setIsSaving] = useState(false);
 
@@ -126,18 +126,11 @@ const Settings = ({ navigation, settings }) => {
                             <Block style={styles.bottomButtonContainer}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    style={styles.button}
+                                    style={styles.wiFiButton}
                                     onPress={handleOpenWiFiSettings}
                                 >
                                     <Block center middle>
-                                        <Text
-                                            welcome
-                                            bold
-                                            color={'secondary'}
-                                        >
-                                            <SettingsIcon size={24} />
-                                            &nbsp;Open WiFi Settings
-                                        </Text>
+                                        <WiFiIcon size={24} />
                                     </Block>
                                 </TouchableOpacity>
                             </Block>
@@ -186,17 +179,26 @@ const styles = StyleSheet.create({
         marginBottom: responsiveHeight(2),
         backgroundColor: theme.colors.secondary
     },
+    button: {
+        marginTop: responsiveHeight(1),
+        backgroundColor: theme.colors.primary,
+        width: '100%',
+        padding: theme.sizes.base,
+        borderRadius: responsiveHeight(1.5) / 2,
+        textAlign: 'center'
+    },
     bottomButtonContainer: {
         position: 'absolute',
         bottom: responsiveHeight(12),
         left: 0,
         right: 0,
+        alignItems: 'flex-end',
         paddingHorizontal: responsiveHeight(1.5),
     },
-    button: {
+    wiFiButton: {
         marginTop: responsiveHeight(1),
         backgroundColor: theme.colors.primary,
-        width: '100%',
+        width: '20%',
         padding: theme.sizes.base,
         borderRadius: responsiveHeight(1.5) / 2,
         textAlign: 'center'
