@@ -24,6 +24,7 @@ import mocks from '../icons';
 import LiveDot from '../components/LiveDot';
 import MqttService from '../services/MqttService';
 import Regex from '../helpers/Regex';
+import Toast from 'react-native-root-toast';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
@@ -90,7 +91,7 @@ const Dashboard = ({ navigation, settings }) => {
             () => {
                 console.log('MQTT connected');
                 MqttService.subscribe('eregulation', onMessageArrived);
-                MqttService.send('eregulation', 'ping');
+                MqttService.send('eregulation', 'welcome');
             },
             (error) => {
                 console.error('MQTT connection failed:', error);
@@ -104,9 +105,10 @@ const Dashboard = ({ navigation, settings }) => {
     }, []);
 
     const onMessageArrived = (message) => {
+        console.log('Received message:', message.payloadString);
+        
         const liveDataRegex = /^t-\d+-h-\d+$/;
 
-        console.log('Received message:', message.payloadString);
         if (liveDataRegex.test(message.payloadString)) {
             const parsedLiveData = Regex.parseLiveTemperatureAndHumidity(message.payloadString);
             setLiveTemperature(parsedLiveData.temperature);
@@ -116,9 +118,19 @@ const Dashboard = ({ navigation, settings }) => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
+        MqttService.send('eregulation', 'ping');
         setTimeout(() => {
             setRefreshing(false);
-        }, 2000);
+
+            Toast.show('Updated live data', {
+                duration: 1000,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                backgroundColor: theme.colors.green
+            });
+        }, 1000);
     }, []);
 
     return (
