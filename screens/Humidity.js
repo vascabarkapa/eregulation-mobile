@@ -56,7 +56,7 @@ const Humidity = ({ navigation, settings }) => {
         };
 
         animate();
-    }, [opacityValue]);
+    }, [opacityValue, isTurnedOnHumidityRegulation]);
 
     const handleMinHumiditySliderChange = (value) => {
         setTempMinHumidity(Math.floor(value));
@@ -86,9 +86,9 @@ const Humidity = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOnHumidityRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <Animated.View style={{ opacity: opacityValue }}>
+                        {isTurnedOnHumidityRegulation ? <Animated.View style={{ opacity: opacityValue }}>
                             <HumidityIcon size={responsiveHeight(70)} color={isTurnedOnHumidityRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
-                        </Animated.View>
+                        </Animated.View> : <HumidityIcon size={responsiveHeight(70)} color={isTurnedOnHumidityRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />}
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.humidityPage}>

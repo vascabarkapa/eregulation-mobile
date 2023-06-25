@@ -56,7 +56,7 @@ const Temperature = ({ navigation, settings }) => {
         };
 
         animate();
-    }, [opacityValue]);
+    }, [opacityValue, isTurnedOnTemperatureRegulation]);
 
     const handleMinTemperatureSliderChange = (value) => {
         setTempMinTemperature(Math.floor(value));
@@ -86,9 +86,9 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOnTemperatureRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <Animated.View style={{ opacity: opacityValue }}>
+                        {isTurnedOnTemperatureRegulation ? <Animated.View style={{ opacity: opacityValue }}>
                             <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
-                        </Animated.View>
+                        </Animated.View> : <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />}
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
