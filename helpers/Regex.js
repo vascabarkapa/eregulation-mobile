@@ -1,17 +1,16 @@
 function parseLiveTemperatureAndHumidity(message) {
-    const values = message.split("-");
-    const temperature = values[1];
-    const humidity = values[3];
-  
-    return {
-      temperature,
-      humidity
-    };
-  }
+  const values = message.split("-");
+  const temperature = values[1];
+  const humidity = values[3];
 
-  const Regex = {
-    parseLiveTemperatureAndHumidity
-  }
+  return {
+    temperature,
+    humidity
+  };
+}
 
-  export default Regex;
-  
+const Regex = {
+  parseLiveTemperatureAndHumidity
+}
+
+export default Regex;
