@@ -7,12 +7,19 @@ class MqttService {
     this.password = 'eRegulation123!'; // Replace with your MQTT password
 
     this.client = new Client('e3a0ad2ab69842fbb684a383f2306b47.s2.eu.hivemq.cloud', 8884, 'clientId' + Math.random(1, 1000));
+    this.isConnected = false; // Flag to track connection status
   }
 
   connect(onConnect, onFailure) {
     this.client.connect({
-      onSuccess: onConnect,
-      onFailure: onFailure,
+      onSuccess: () => {
+        this.isConnected = true; // Set the flag to true on successful connection
+        onConnect();
+      },
+      onFailure: (error) => {
+        this.isConnected = false; // Set the flag to false on connection failure
+        onFailure(error);
+      },
       useSSL: true,
       userName: this.userName,
       password: this.password,
@@ -32,6 +39,10 @@ class MqttService {
     const mqttMessage = new Message(message);
     mqttMessage.destinationName = topic;
     this.client.send(mqttMessage);
+  }
+
+  isMqttConnected() {
+    return this.isConnected;
   }
 }
 
