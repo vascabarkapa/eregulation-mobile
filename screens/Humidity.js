@@ -21,12 +21,8 @@ import { GlobalContext } from '../contexts/GlobalContext';
 
 const Humidity = ({ navigation, settings }) => {
     const HumidityIcon = settings['humidity'].icon;
-    const { liveHumidity } = useContext(GlobalContext);
-
+    const { liveHumidity, minHumidity, setMinHumidity, maxHumidity, setMaxHumidity } = useContext(GlobalContext);
     const [isTurnedOn, setIsTurnedOn] = useState(false);
-    const [minHumidity, setMinHumidity] = useState(40);
-    const [maxHumidity, setMaxHumidity] = useState(60);
-
     const opacityValue = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {

@@ -21,12 +21,8 @@ import { GlobalContext } from '../contexts/GlobalContext';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
-    const { liveTemperature } = useContext(GlobalContext);
-
+    const { liveTemperature, minTemperature, setMinTemperature, maxTemperature, setMaxTemperature } = useContext(GlobalContext);
     const [isTurnedOn, setIsTurnedOn] = useState(false);
-    const [minTemperature, setMinTemperature] = useState(18);
-    const [maxTemperature, setMaxTemperature] = useState(24);
-
     const opacityValue = useRef(new Animated.Value(1)).current;
 
     useEffect(() => {
