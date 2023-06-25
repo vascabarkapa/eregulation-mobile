@@ -40,14 +40,14 @@ const Temperature = ({ navigation, settings }) => {
             Animated.loop(
                 Animated.sequence([
                     Animated.timing(opacityValue, {
-                        toValue: 0,
-                        duration: 400,
+                        toValue: 0.3,
+                        duration: 500,
                         easing: Easing.linear,
                         useNativeDriver: true,
                     }),
                     Animated.timing(opacityValue, {
                         toValue: 1,
-                        duration: 400,
+                        duration: 500,
                         easing: Easing.linear,
                         useNativeDriver: true,
                     }),
@@ -86,7 +86,9 @@ const Temperature = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOnTemperatureRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        <Animated.View style={{ opacity: opacityValue }}>
+                            <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        </Animated.View>
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
@@ -96,9 +98,7 @@ const Temperature = ({ navigation, settings }) => {
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
                                 <Text live style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{liveTemperature}</Text>
-                                <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>°C</Text>
-                                </Animated.View>
+                                <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>°C</Text>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
                                 <Text welcome style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>Turned <Text welcome bold style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{isTurnedOnTemperatureRegulation ? 'ON' : 'OFF'}</Text></Text>
