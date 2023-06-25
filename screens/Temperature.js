@@ -18,6 +18,7 @@ import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
 import { GlobalContext } from '../contexts/GlobalContext';
+import MqttService from '../services/MqttService';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
@@ -67,6 +68,7 @@ const Temperature = ({ navigation, settings }) => {
     };
 
     const turnOnOffTemperature = (value) => {
+        MqttService.send('eregulation', 't-' + (isTurnedOnTemperatureRegulation === true ? 'off' : 'on'))
         setIsTurnedOnTemperatureRegulation(value => !value);
     };
 

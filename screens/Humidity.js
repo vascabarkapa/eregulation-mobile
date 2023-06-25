@@ -18,6 +18,7 @@ import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
 import { GlobalContext } from '../contexts/GlobalContext';
+import MqttService from '../services/MqttService';
 
 const Humidity = ({ navigation, settings }) => {
     const HumidityIcon = settings['humidity'].icon;
@@ -67,6 +68,7 @@ const Humidity = ({ navigation, settings }) => {
     };
 
     const turnOnOffHumidity = (value) => {
+        MqttService.send('eregulation', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'))
         setIsTurnedOnHumidityRegulation(value => !value);
     };
 
