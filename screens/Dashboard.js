@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
     ImageBackground,
     Image,
@@ -13,6 +13,7 @@ import {
     responsiveWidth,
 } from "react-native-responsive-dimensions";
 import { useFocusEffect } from '@react-navigation/native';
+import { GlobalContext } from '../contexts/GlobalContext';
 import { Block, Text } from '../components';
 import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
@@ -44,8 +45,8 @@ const Dashboard = ({ navigation, settings }) => {
     const greeting = getGreeting();
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
-    const [temperature, setTemperature] = useState(0);
-    const [humidity, setHumidity] = useState(0);
+
+    const { liveTemperature, setLiveTemperature, liveHumidity, setLiveHumidity } = useContext(GlobalContext);
 
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
@@ -103,8 +104,8 @@ const Dashboard = ({ navigation, settings }) => {
         console.log('Received message:', message.payloadString);
         if (liveDataRegex.test(message.payloadString)) {
             const parsedLiveData = Regex.parseLiveTemperatureAndHumidity(message.payloadString);
-            setTemperature(parsedLiveData.temperature);
-            setHumidity(parsedLiveData.humidity);
+            setLiveTemperature(parsedLiveData.temperature);
+            setLiveHumidity(parsedLiveData.humidity);
         }
     };
 
@@ -129,14 +130,14 @@ const Dashboard = ({ navigation, settings }) => {
 
                     <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
                         <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                            <Text h1>{temperature}</Text>
+                            <Text h1>{liveTemperature}</Text>
                             <Block column>
                                 <LiveDot />
                                 <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
                             </Block>
                         </Block>
                         <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
-                            <Text h1>{humidity}</Text>
+                            <Text h1>{liveHumidity}</Text>
                             <Block column>
                                 <LiveDot />
                                 <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
