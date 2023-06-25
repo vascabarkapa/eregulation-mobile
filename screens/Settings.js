@@ -63,7 +63,7 @@ const Settings = ({ navigation, settings }) => {
                 shadow: true,
                 animation: true,
                 hideOnPress: true,
-                backgroundColor: '#28432C'
+                backgroundColor: theme.colors.green
             });
         }, 500);
     };

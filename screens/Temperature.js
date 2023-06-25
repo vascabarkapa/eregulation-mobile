@@ -78,7 +78,7 @@ const Temperature = ({ navigation, settings }) => {
             shadow: true,
             animation: true,
             hideOnPress: true,
-            backgroundColor: isTurnedOnTemperatureRegulation === true ? '#D9C43E' : '#28432C'
+            backgroundColor: isTurnedOnTemperatureRegulation === true ? theme.colors.yellow : theme.colors.green
         });
     };
 
