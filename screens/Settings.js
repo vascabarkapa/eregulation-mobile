@@ -18,6 +18,7 @@ import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
+import Toast from 'react-native-root-toast';
 
 const FILE_NAME = 'systemData.json';
 const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
@@ -55,6 +56,15 @@ const Settings = ({ navigation, settings }) => {
 
         setTimeout(() => {
             setIsSaving(false);
+
+            let toast = Toast.show('Saved Successfully', {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                backgroundColor: '#28432C'
+            });
         }, 500);
     };
 
