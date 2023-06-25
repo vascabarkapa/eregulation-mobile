@@ -26,7 +26,6 @@ const Settings = ({ navigation, settings }) => {
     const SettingsIcon = settings['settings'].icon;
 
     const [isSaving, setIsSaving] = useState(false);
-    const [btnSaveLabel, setBtnSaveLabel] = useState('Save Settings');
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -56,10 +55,6 @@ const Settings = ({ navigation, settings }) => {
 
         setTimeout(() => {
             setIsSaving(false);
-            setBtnSaveLabel('Saved Successfuly');
-            setTimeout(() => {
-                setBtnSaveLabel('Save Settings');
-            }, 1000);
         }, 500);
     };
 
@@ -113,7 +108,7 @@ const Settings = ({ navigation, settings }) => {
                                             bold
                                             color={'secondary'}
                                         >
-                                            {btnSaveLabel}
+                                            Save Settings
                                         </Text>
                                     }
                                 </Block>
