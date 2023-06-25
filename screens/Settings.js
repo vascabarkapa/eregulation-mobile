@@ -58,7 +58,7 @@ const Settings = ({ navigation, settings }) => {
             setIsSaving(false);
 
             Toast.show('Saved Successfully', {
-                duration: Toast.durations.SHORT,
+                duration: 500,
                 position: Toast.positions.BOTTOM,
                 shadow: true,
                 animation: true,

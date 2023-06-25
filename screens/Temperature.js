@@ -91,7 +91,7 @@ const Temperature = ({ navigation, settings }) => {
         setTempMaxTemperature(tempMaxTemperature);
 
         Toast.show('Temperature range successfully saved', {
-            duration: 500,
+            duration: 1000,
             position: Toast.positions.BOTTOM,
             shadow: true,
             animation: true,

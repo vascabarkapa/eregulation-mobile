@@ -91,7 +91,7 @@ const Humidity = ({ navigation, settings }) => {
         setTempMaxHumidity(tempMaxHumidity);
 
         Toast.show('Humidity range successfully saved', {
-            duration: 500,
+            duration: 1000,
             position: Toast.positions.BOTTOM,
             shadow: true,
             animation: true,
