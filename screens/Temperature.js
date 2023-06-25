@@ -19,6 +19,7 @@ import mocks from '../icons';
 import { Block, Text } from '../components';
 import { GlobalContext } from '../contexts/GlobalContext';
 import MqttService from '../services/MqttService';
+import Toast from 'react-native-root-toast';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
@@ -70,6 +71,15 @@ const Temperature = ({ navigation, settings }) => {
     const turnOnOffTemperature = (value) => {
         MqttService.send('eregulation', 't-' + (isTurnedOnTemperatureRegulation === true ? 'off' : 'on'))
         setIsTurnedOnTemperatureRegulation(value => !value);
+
+        Toast.show('Temperature regulation is ' + (isTurnedOnTemperatureRegulation === true ? 'OFF' : 'ON'), {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: isTurnedOnTemperatureRegulation === true ? '#D9C43E' : '#28432C'
+        });
     };
 
     const saveTemperatureRange = () => {
