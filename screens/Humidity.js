@@ -19,6 +19,7 @@ import mocks from '../icons';
 import { Block, Text } from '../components';
 import { GlobalContext } from '../contexts/GlobalContext';
 import MqttService from '../services/MqttService';
+import Toast from 'react-native-root-toast';
 
 const Humidity = ({ navigation, settings }) => {
     const HumidityIcon = settings['humidity'].icon;
@@ -70,6 +71,15 @@ const Humidity = ({ navigation, settings }) => {
     const turnOnOffHumidity = (value) => {
         MqttService.send('eregulation', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'));
         setIsTurnedOnHumidityRegulation(value => !value);
+
+        Toast.show('Humidity regulation is ' + (isTurnedOnHumidityRegulation === true ? 'OFF' : 'ON'), {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: isTurnedOnHumidityRegulation === true ? theme.colors.yellow : theme.colors.green
+        });
     };
 
     const saveHumidityRange = () => {
