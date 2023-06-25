@@ -73,7 +73,7 @@ const Temperature = ({ navigation, settings }) => {
         setIsTurnedOnTemperatureRegulation(value => !value);
 
         Toast.show('Temperature regulation is ' + (isTurnedOnTemperatureRegulation === true ? 'OFF' : 'ON'), {
-            duration: Toast.durations.SHORT,
+            duration: 500,
             position: Toast.positions.BOTTOM,
             shadow: true,
             animation: true,
@@ -89,6 +89,15 @@ const Temperature = ({ navigation, settings }) => {
         setTempMinTemperature(tempMinTemperature);
         setMaxTemperature(tempMaxTemperature);
         setTempMaxTemperature(tempMaxTemperature);
+
+        Toast.show('Temperature range successfully saved', {
+            duration: 500,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: theme.colors.green
+        });
     }
 
     return (

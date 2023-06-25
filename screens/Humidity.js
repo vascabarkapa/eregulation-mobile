@@ -73,7 +73,7 @@ const Humidity = ({ navigation, settings }) => {
         setIsTurnedOnHumidityRegulation(value => !value);
 
         Toast.show('Humidity regulation is ' + (isTurnedOnHumidityRegulation === true ? 'OFF' : 'ON'), {
-            duration: Toast.durations.SHORT,
+            duration: 500,
             position: Toast.positions.BOTTOM,
             shadow: true,
             animation: true,
@@ -89,6 +89,15 @@ const Humidity = ({ navigation, settings }) => {
         setTempMinHumidity(tempMinHumidity);
         setMaxHumidity(tempMaxHumidity);
         setTempMaxHumidity(tempMaxHumidity);
+
+        Toast.show('Humidity range successfully saved', {
+            duration: 500,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: theme.colors.green
+        });
     }
 
     return (
