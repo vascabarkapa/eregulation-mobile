@@ -127,6 +127,7 @@ const Dashboard = ({ navigation, settings }) => {
                 <StatusBar translucent={true} backgroundColor="transparent" />
                 <Block style={styles.dashboard}>
                     <ScrollView
+                        scrollEnabled={false}
                         refreshControl={
                             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
                         }>
