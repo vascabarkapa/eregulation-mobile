@@ -12,6 +12,10 @@ export const GlobalProvider = ({ children }) => {
     const [minHumidity, setMinHumidity] = useState(40);
     const [maxHumidity, setMaxHumidity] = useState(60);
 
+    const [isTurnedOnTemperatureRegulation, setIsTurnedOnTemperatureRegulation] = useState(false);
+    const [isTurnedOnHumidityRegulation, setIsTurnedOnHumidityRegulation] = useState(false);
+
+
     return (
         <GlobalContext.Provider
             value={{
@@ -26,7 +30,11 @@ export const GlobalProvider = ({ children }) => {
                 minHumidity,
                 setMinHumidity,
                 maxHumidity,
-                setMaxHumidity
+                setMaxHumidity,
+                isTurnedOnTemperatureRegulation,
+                setIsTurnedOnTemperatureRegulation,
+                isTurnedOnHumidityRegulation,
+                setIsTurnedOnHumidityRegulation
             }}
         >
             {children}
