@@ -68,11 +68,13 @@ const Humidity = ({ navigation, settings }) => {
     };
 
     const turnOnOffHumidity = (value) => {
-        MqttService.send('eregulation', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'))
+        MqttService.send('eregulation', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'));
         setIsTurnedOnHumidityRegulation(value => !value);
     };
 
     const saveHumidityRange = () => {
+        MqttService.send('eregulation', 'h-' + tempMinHumidity + '-' + tempMaxHumidity);
+
         setMinHumidity(tempMinHumidity);
         setTempMinHumidity(tempMinHumidity);
         setMaxHumidity(tempMaxHumidity);

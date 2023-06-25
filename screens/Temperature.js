@@ -73,6 +73,8 @@ const Temperature = ({ navigation, settings }) => {
     };
 
     const saveTemperatureRange = () => {
+        MqttService.send('eregulation', 't-' + tempMinTemperature + '-' + tempMaxTemperature);
+
         setMinTemperature(tempMinTemperature);
         setTempMinTemperature(tempMinTemperature);
         setMaxTemperature(tempMaxTemperature);
