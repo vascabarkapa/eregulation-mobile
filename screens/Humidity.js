@@ -40,14 +40,14 @@ const Humidity = ({ navigation, settings }) => {
             Animated.loop(
                 Animated.sequence([
                     Animated.timing(opacityValue, {
-                        toValue: 0,
-                        duration: 400,
+                        toValue: 0.3,
+                        duration: 500,
                         easing: Easing.linear,
                         useNativeDriver: true,
                     }),
                     Animated.timing(opacityValue, {
                         toValue: 1,
-                        duration: 400,
+                        duration: 500,
                         easing: Easing.linear,
                         useNativeDriver: true,
                     }),
@@ -86,7 +86,9 @@ const Humidity = ({ navigation, settings }) => {
             <Block style={styles.container}>
                 <ImageBackground source={isTurnedOnHumidityRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <HumidityIcon size={responsiveHeight(70)} color={isTurnedOnHumidityRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        <Animated.View style={{ opacity: opacityValue }}>
+                            <HumidityIcon size={responsiveHeight(70)} color={isTurnedOnHumidityRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        </Animated.View>
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.humidityPage}>
@@ -96,9 +98,7 @@ const Humidity = ({ navigation, settings }) => {
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
                                 <Text live style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>{liveHumidity}</Text>
-                                <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={0.1} style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>%</Text>
-                                </Animated.View>
+                                <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={0.1} style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>%</Text>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
                                 <Text welcome style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>Turned <Text welcome bold style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>{isTurnedOnHumidityRegulation ? 'ON' : 'OFF'}</Text></Text>
