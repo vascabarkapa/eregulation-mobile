@@ -56,7 +56,18 @@ const Dashboard = ({ navigation, settings }) => {
     const [firstName, setFirstName] = useState(null);
     const [lastName, setLastName] = useState(null);
 
-    const { liveTemperature, setLiveTemperature, liveHumidity, setLiveHumidity } = useContext(GlobalContext);
+    const {
+        liveTemperature,
+        setLiveTemperature,
+        liveHumidity,
+        setLiveHumidity,
+        setMinTemperature,
+        setMaxTemperature,
+        setMinHumidity,
+        setMaxHumidity,
+        setIsTurnedOnTemperatureRegulation,
+        setIsTurnedOnHumidityRegulation
+    } = useContext(GlobalContext);
 
     const checkDataFile = async () => {
         const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
@@ -106,11 +117,27 @@ const Dashboard = ({ navigation, settings }) => {
 
     const onMessageArrived = (message) => {
         console.log('Received message:', message.payloadString);
-        
+
         const liveDataRegex = /^t-\d+-h-\d+$/;
+        const configDataRegex = /^t-\d+-\d+-\d+-\d+-h-\d+-\d+-\d+-\d+$/;
+
+        if (configDataRegex.test(message.payloadString)) {
+            const parsedConfigData = Regex.parseConfigData(message.payloadString);
+
+            setLiveTemperature(parsedConfigData.liveTemperature);
+            setIsTurnedOnTemperatureRegulation(parsedConfigData.isTurnedOnTemperatureRegulation === 1 ? true : false);
+            setMinTemperature(parsedConfigData.minTemperature);
+            setMaxTemperature(parsedConfigData.maxTemperature);
+
+            setLiveHumidity(parsedConfigData.liveHumidity);
+            setIsTurnedOnHumidityRegulation(parsedConfigData.isTurnedOnHumidityRegulation === 1 ? true : false);
+            setMinHumidity(parsedConfigData.minHumidity);
+            setMaxHumidity(parsedConfigData.maxHumidity);
+        }
 
         if (liveDataRegex.test(message.payloadString)) {
             const parsedLiveData = Regex.parseLiveTemperatureAndHumidity(message.payloadString);
+
             setLiveTemperature(parsedLiveData.temperature);
             setLiveHumidity(parsedLiveData.humidity);
         }
