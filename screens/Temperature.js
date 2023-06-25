@@ -32,8 +32,8 @@ const Temperature = ({ navigation, settings }) => {
     } = useContext(GlobalContext);
     const opacityValue = useRef(new Animated.Value(1)).current;
 
-    const [tempMinTemperature, setTempMinTemperature] = useState(18);
-    const [tempMaxTemperature, setTempMaxTemperature] = useState(24);
+    const [tempMinTemperature, setTempMinTemperature] = useState(minTemperature);
+    const [tempMaxTemperature, setTempMaxTemperature] = useState(maxTemperature);
 
     useEffect(() => {
         const animate = () => {
@@ -69,6 +69,13 @@ const Temperature = ({ navigation, settings }) => {
     const turnOnOffTemperature = (value) => {
         setIsTurnedOnTemperatureRegulation(value => !value);
     };
+
+    const saveTemperatureRange = () => {
+        setMinTemperature(tempMinTemperature);
+        setTempMinTemperature(tempMinTemperature);
+        setMaxTemperature(tempMaxTemperature);
+        setTempMaxTemperature(tempMaxTemperature);
+    }
 
     return (
         <KeyboardAvoidingView
@@ -148,7 +155,7 @@ const Temperature = ({ navigation, settings }) => {
                                 <TouchableOpacity
                                     activeOpacity={0.8}
                                     style={styles.button}
-                                    onPress={() => navigation.navigate('Dashboard')}
+                                    onPress={saveTemperatureRange}
                                 >
                                     <Block center middle>
                                         <Text
