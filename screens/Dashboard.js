@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useRef } from 'react';
 import {
     ImageBackground,
     Image,
@@ -8,7 +8,9 @@ import {
     View,
     Linking,
     ScrollView,
-    RefreshControl
+    RefreshControl,
+    Animated,
+    Easing
 } from 'react-native';
 import {
     responsiveHeight,
@@ -47,6 +49,8 @@ const getGreeting = () => {
 const Dashboard = ({ navigation, settings }) => {
     const greeting = getGreeting();
 
+    const opacityValue = useRef(new Animated.Value(1)).current;
+
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
     const StatisticsIcon = settings['statistics'].icon;
@@ -65,9 +69,34 @@ const Dashboard = ({ navigation, settings }) => {
         setMaxTemperature,
         setMinHumidity,
         setMaxHumidity,
+        isTurnedOnTemperatureRegulation,
         setIsTurnedOnTemperatureRegulation,
+        isTurnedOnHumidityRegulation,
         setIsTurnedOnHumidityRegulation
     } = useContext(GlobalContext);
+
+    useEffect(() => {
+        const animate = () => {
+            Animated.loop(
+                Animated.sequence([
+                    Animated.timing(opacityValue, {
+                        toValue: 0.3,
+                        duration: 500,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                    Animated.timing(opacityValue, {
+                        toValue: 1,
+                        duration: 500,
+                        easing: Easing.linear,
+                        useNativeDriver: true,
+                    }),
+                ]),
+            ).start();
+        };
+
+        animate();
+    }, [opacityValue]);
 
     const checkDataFile = async () => {
         const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
@@ -145,8 +174,9 @@ const Dashboard = ({ navigation, settings }) => {
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        MqttService.send('eregulation', 'ping');
+
         setTimeout(() => {
+            MqttService.send('eregulation', 'ping');
             setRefreshing(false);
 
             Toast.show('Updated live data', {
@@ -204,7 +234,9 @@ const Dashboard = ({ navigation, settings }) => {
                                         onPress={() => navigation.navigate('Temperature')}
                                     >
                                         <Block center middle style={styles.button}>
-                                            <TemperatureIcon size={38} />
+                                            {isTurnedOnTemperatureRegulation ? <Animated.View style={{ opacity: opacityValue }}>
+                                                <TemperatureIcon size={42} />
+                                            </Animated.View> : <TemperatureIcon size={42} />}
                                             <Text
                                                 button
                                                 color={'secondary'}
@@ -220,7 +252,10 @@ const Dashboard = ({ navigation, settings }) => {
                                         onPress={() => navigation.navigate('Humidity')}
                                     >
                                         <Block center middle style={styles.button}>
-                                            <HumidityIcon size={38} />
+                                            {isTurnedOnHumidityRegulation ? <Animated.View style={{ opacity: opacityValue }}>
+                                                <HumidityIcon size={42} />
+                                            </Animated.View> : <HumidityIcon size={42} />}
+
                                             <Text
                                                 button
                                                 color={'secondary'}
@@ -238,7 +273,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         onPress={redirectToStatistics}
                                     >
                                         <Block center middle style={styles.button}>
-                                            <StatisticsIcon size={38} />
+                                            <StatisticsIcon size={42} />
                                             <Text
                                                 button
                                                 color={'secondary'}
@@ -254,7 +289,7 @@ const Dashboard = ({ navigation, settings }) => {
                                         onPress={() => navigation.navigate('Settings', { name: 'settings' })}
                                     >
                                         <Block center middle style={styles.button}>
-                                            <SettingsIcon size={38} />
+                                            <SettingsIcon size={42} />
                                             <Text
                                                 button
                                                 color={'secondary'}
