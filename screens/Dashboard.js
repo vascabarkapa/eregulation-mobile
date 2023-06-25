@@ -151,7 +151,7 @@ const Dashboard = ({ navigation, settings }) => {
 
             Toast.show('Updated live data', {
                 duration: 1000,
-                position: Toast.positions.BOTTOM,
+                position: -responsiveHeight(5),
                 shadow: true,
                 animation: true,
                 hideOnPress: true,

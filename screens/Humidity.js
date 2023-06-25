@@ -74,7 +74,7 @@ const Humidity = ({ navigation, settings }) => {
 
         Toast.show('Humidity regulation is ' + (isTurnedOnHumidityRegulation === true ? 'OFF' : 'ON'), {
             duration: 500,
-            position: Toast.positions.BOTTOM,
+            position: -responsiveHeight(5),
             shadow: true,
             animation: true,
             hideOnPress: true,
@@ -92,7 +92,7 @@ const Humidity = ({ navigation, settings }) => {
 
         Toast.show('Humidity range successfully saved', {
             duration: 1000,
-            position: Toast.positions.BOTTOM,
+            position: -responsiveHeight(5),
             shadow: true,
             animation: true,
             hideOnPress: true,
