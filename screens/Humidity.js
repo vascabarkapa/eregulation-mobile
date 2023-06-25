@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 import {
@@ -17,9 +17,11 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 const Humidity = ({ navigation, settings }) => {
     const HumidityIcon = settings['humidity'].icon;
+    const { liveHumidity } = useContext(GlobalContext);
 
     const [isTurnedOn, setIsTurnedOn] = useState(false);
     const [minHumidity, setMinHumidity] = useState(40);
@@ -80,7 +82,7 @@ const Humidity = ({ navigation, settings }) => {
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>48</Text>
+                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>{liveHumidity}</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
                                     <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={0.1} style={!isTurnedOn && { color: theme.colors.secondary }}>%</Text>
                                 </Animated.View>
