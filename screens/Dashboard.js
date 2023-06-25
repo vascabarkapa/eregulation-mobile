@@ -213,14 +213,14 @@ const Dashboard = ({ navigation, settings }) => {
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
                                 <Text h1>{liveTemperature}</Text>
                                 <Block column>
-                                    <LiveDot />
+                                    {/* <LiveDot /> */}
                                     <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
                                 </Block>
                             </Block>
                             <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
                                 <Text h1>{liveHumidity}</Text>
                                 <Block column>
-                                    <LiveDot />
+                                    {/* <LiveDot /> */}
                                     <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
                                 </Block>
                             </Block>

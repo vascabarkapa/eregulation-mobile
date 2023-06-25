@@ -13,7 +13,7 @@ const LiveDot = () => {
                 Animated.sequence([
                     Animated.timing(opacityValue, {
                         toValue: 0,
-                        duration: 400,
+                        duration: 1400,
                         easing: Easing.linear,
                         useNativeDriver: true,
                     }),
