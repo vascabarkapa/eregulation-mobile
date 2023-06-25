@@ -21,8 +21,15 @@ import { GlobalContext } from '../contexts/GlobalContext';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
-    const { liveTemperature, minTemperature, setMinTemperature, maxTemperature, setMaxTemperature } = useContext(GlobalContext);
-    const [isTurnedOn, setIsTurnedOn] = useState(false);
+    const { 
+        liveTemperature,
+        minTemperature,
+        setMinTemperature,
+        maxTemperature,
+        setMaxTemperature,
+        isTurnedOnTemperatureRegulation,
+        setIsTurnedOnTemperatureRegulation
+    } = useContext(GlobalContext);
     const opacityValue = useRef(new Animated.Value(1)).current;
 
     const [tempMinTemperature, setTempMinTemperature] = useState(18);
@@ -60,7 +67,7 @@ const Temperature = ({ navigation, settings }) => {
     };
 
     const turnOnOffTemperature = (value) => {
-        setIsTurnedOn(value => !value);
+        setIsTurnedOnTemperatureRegulation(value => !value);
     };
 
     return (
@@ -70,34 +77,34 @@ const Temperature = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={isTurnedOn ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOnTemperatureRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
-                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOn ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
+                        <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.2} />
                     </View>
                     <StatusBar translucent={true} backgroundColor="transparent" />
                     <Block style={styles.temperaturePage}>
                         <Block center>
-                            <Text h2 bold style={!isTurnedOn && { color: theme.colors.secondary }}>Temperature</Text>
+                            <Text h2 bold style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>Temperature</Text>
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>{liveTemperature}</Text>
+                                <Text live style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{liveTemperature}</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
-                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOn && { color: theme.colors.secondary }}>°C</Text>
+                                    <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>°C</Text>
                                 </Animated.View>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
-                                <Text welcome style={!isTurnedOn && { color: theme.colors.secondary }}>Turned <Text welcome bold style={!isTurnedOn && { color: theme.colors.secondary }}>{isTurnedOn ? 'ON' : 'OFF'}</Text></Text>
+                                <Text welcome style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>Turned <Text welcome bold style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{isTurnedOnTemperatureRegulation ? 'ON' : 'OFF'}</Text></Text>
                                 <Switch
                                     trackColor={{ false: theme.colors.gray, true: theme.colors.primary }}
-                                    thumbColor={isTurnedOn ? theme.colors.primary : theme.colors.gray2}
-                                    value={isTurnedOn}
+                                    thumbColor={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.gray2}
+                                    value={isTurnedOnTemperatureRegulation}
                                     onChange={turnOnOffTemperature}
                                     style={styles.switch}
                                 />
                             </Block>
                         </Block>
-                        {isTurnedOn ? <Block flex={1} style={{ paddingTop: responsiveHeight(1) }}>
+                        {isTurnedOnTemperatureRegulation ? <Block flex={1} style={{ paddingTop: responsiveHeight(1) }}>
                             <Block center>
                                 <Text welcome bold>Adjust the Temperature range</Text>
                             </Block>
