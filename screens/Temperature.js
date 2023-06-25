@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import { Animated, Easing, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 import {
@@ -17,9 +17,11 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
+import { GlobalContext } from '../contexts/GlobalContext';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
+    const { liveTemperature } = useContext(GlobalContext);
 
     const [isTurnedOn, setIsTurnedOn] = useState(false);
     const [minTemperature, setMinTemperature] = useState(18);
@@ -80,7 +82,7 @@ const Temperature = ({ navigation, settings }) => {
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>28</Text>
+                                <Text live style={!isTurnedOn && { color: theme.colors.secondary }}>{liveTemperature}</Text>
                                 <Animated.View style={{ opacity: opacityValue }}>
                                     <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOn && { color: theme.colors.secondary }}>°C</Text>
                                 </Animated.View>
