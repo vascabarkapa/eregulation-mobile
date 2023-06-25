@@ -21,7 +21,7 @@ import { GlobalContext } from '../contexts/GlobalContext';
 
 const Temperature = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
-    const { 
+    const {
         liveTemperature,
         minTemperature,
         setMinTemperature,
