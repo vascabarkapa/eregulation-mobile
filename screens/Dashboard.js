@@ -86,7 +86,7 @@ const Dashboard = ({ navigation, settings }) => {
                         useNativeDriver: true,
                     }),
                     Animated.timing(opacityValue, {
-                        toValue: 1,
+                        toValue: 2,
                         duration: 500,
                         easing: Easing.linear,
                         useNativeDriver: true,
