@@ -74,7 +74,7 @@ const Temperature = ({ navigation, settings }) => {
 
         Toast.show('Temperature regulation is ' + (isTurnedOnTemperatureRegulation === true ? 'OFF' : 'ON'), {
             duration: 500,
-            position: Toast.positions.BOTTOM,
+            position: -responsiveHeight(5),
             shadow: true,
             animation: true,
             hideOnPress: true,
@@ -92,7 +92,7 @@ const Temperature = ({ navigation, settings }) => {
 
         Toast.show('Temperature range successfully saved', {
             duration: 1000,
-            position: Toast.positions.BOTTOM,
+            position: -responsiveHeight(5),
             shadow: true,
             animation: true,
             hideOnPress: true,

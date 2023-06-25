@@ -59,7 +59,7 @@ const Settings = ({ navigation, settings }) => {
 
             Toast.show('Saved Successfully', {
                 duration: 500,
-                position: Toast.positions.BOTTOM,
+                position: -responsiveHeight(5),
                 shadow: true,
                 animation: true,
                 hideOnPress: true,
