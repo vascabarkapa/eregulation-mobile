@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import {
     ImageBackground,
     Image,
@@ -6,7 +6,9 @@ import {
     StyleSheet,
     TouchableOpacity,
     View,
-    Linking
+    Linking,
+    ScrollView,
+    RefreshControl
 } from 'react-native';
 import {
     responsiveHeight,
@@ -43,15 +45,17 @@ const getGreeting = () => {
 
 const Dashboard = ({ navigation, settings }) => {
     const greeting = getGreeting();
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-
-    const { liveTemperature, setLiveTemperature, liveHumidity, setLiveHumidity } = useContext(GlobalContext);
 
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
     const StatisticsIcon = settings['statistics'].icon;
     const SettingsIcon = settings['settings'].icon;
+
+    const [refreshing, setRefreshing] = useState(false);
+    const [firstName, setFirstName] = useState(null);
+    const [lastName, setLastName] = useState(null);
+
+    const { liveTemperature, setLiveTemperature, liveHumidity, setLiveHumidity } = useContext(GlobalContext);
 
     const checkDataFile = async () => {
         const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
@@ -110,108 +114,120 @@ const Dashboard = ({ navigation, settings }) => {
         }
     };
 
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        setTimeout(() => {
+            setRefreshing(false);
+        }, 2000);
+    }, []);
+
     return (
         <Block style={styles.container}>
             <ImageBackground source={images.backgroundOpacity15} style={styles.backgroundImage}>
                 <StatusBar translucent={true} backgroundColor="transparent" />
                 <Block style={styles.dashboard}>
-                    <Block center>
-                        <Image source={images.mainLogo} style={styles.logo} />
-                    </Block>
+                    <ScrollView
+                        refreshControl={
+                            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }>
+                        <Block center>
+                            <Image source={images.mainLogo} style={styles.logo} />
+                        </Block>
 
-                    <Block center column style={{ marginVertical: responsiveHeight(3.5) }}>
-                        <Text welcome>{greeting}</Text>
-                        <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
-                    </Block>
+                        <Block center column style={{ marginVertical: responsiveHeight(3.5) }}>
+                            <Text welcome>{greeting}</Text>
+                            <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
+                        </Block>
 
-                    <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
-                        <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                            <Text h1>{liveTemperature}</Text>
-                            <Block column>
-                                <LiveDot />
-                                <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
+                        <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
+                            <Block flex={2} row style={{ alignItems: 'flex-end', }}>
+                                <Text h1>{liveTemperature}</Text>
+                                <Block column>
+                                    <LiveDot />
+                                    <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
+                                </Block>
+                            </Block>
+                            <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
+                                <Text h1>{liveHumidity}</Text>
+                                <Block column>
+                                    <LiveDot />
+                                    <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
+                                </Block>
                             </Block>
                         </Block>
-                        <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
-                            <Text h1>{liveHumidity}</Text>
-                            <Block column>
-                                <LiveDot />
-                                <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
+
+                        <View contentContainerStyle={styles.buttons} showsVerticalScrollIndicator={false}>
+                            <Block column space="between">
+                                <Block row space="around" style={{ marginVertical: responsiveHeight(2) }}>
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={() => navigation.navigate('Temperature')}
+                                    >
+                                        <Block center middle style={styles.button}>
+                                            <TemperatureIcon size={38} />
+                                            <Text
+                                                button
+                                                color={'secondary'}
+                                                style={{ marginTop: responsiveHeight(1) }}
+                                            >
+                                                {settings['temperature'].name}
+                                            </Text>
+                                        </Block>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={() => navigation.navigate('Humidity')}
+                                    >
+                                        <Block center middle style={styles.button}>
+                                            <HumidityIcon size={38} />
+                                            <Text
+                                                button
+                                                color={'secondary'}
+                                                style={{ marginTop: responsiveHeight(1) }}
+                                            >
+                                                {settings['humidity'].name}
+                                            </Text>
+                                        </Block>
+                                    </TouchableOpacity>
+                                </Block>
+
+                                <Block row space="around" style={{ marginVertical: responsiveHeight(1) }}>
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={redirectToStatistics}
+                                    >
+                                        <Block center middle style={styles.button}>
+                                            <StatisticsIcon size={38} />
+                                            <Text
+                                                button
+                                                color={'secondary'}
+                                                style={{ marginTop: responsiveHeight(1) }}
+                                            >
+                                                {settings['statistics'].name}
+                                            </Text>
+                                        </Block>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={() => navigation.navigate('Settings', { name: 'settings' })}
+                                    >
+                                        <Block center middle style={styles.button}>
+                                            <SettingsIcon size={38} />
+                                            <Text
+                                                button
+                                                color={'secondary'}
+                                                style={{ marginTop: responsiveHeight(1) }}
+                                            >
+                                                {settings['settings'].name}
+                                            </Text>
+                                        </Block>
+                                    </TouchableOpacity>
+                                </Block>
                             </Block>
-                        </Block>
-                    </Block>
-
-                    <View contentContainerStyle={styles.buttons} showsVerticalScrollIndicator={false}>
-                        <Block column space="between">
-                            <Block row space="around" style={{ marginVertical: responsiveHeight(2) }}>
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Temperature')}
-                                >
-                                    <Block center middle style={styles.button}>
-                                        <TemperatureIcon size={38} />
-                                        <Text
-                                            button
-                                            color={'secondary'}
-                                            style={{ marginTop: responsiveHeight(1) }}
-                                        >
-                                            {settings['temperature'].name}
-                                        </Text>
-                                    </Block>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Humidity')}
-                                >
-                                    <Block center middle style={styles.button}>
-                                        <HumidityIcon size={38} />
-                                        <Text
-                                            button
-                                            color={'secondary'}
-                                            style={{ marginTop: responsiveHeight(1) }}
-                                        >
-                                            {settings['humidity'].name}
-                                        </Text>
-                                    </Block>
-                                </TouchableOpacity>
-                            </Block>
-
-                            <Block row space="around" style={{ marginVertical: responsiveHeight(1) }}>
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={redirectToStatistics}
-                                >
-                                    <Block center middle style={styles.button}>
-                                        <StatisticsIcon size={38} />
-                                        <Text
-                                            button
-                                            color={'secondary'}
-                                            style={{ marginTop: responsiveHeight(1) }}
-                                        >
-                                            {settings['statistics'].name}
-                                        </Text>
-                                    </Block>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity
-                                    activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Settings', { name: 'settings' })}
-                                >
-                                    <Block center middle style={styles.button}>
-                                        <SettingsIcon size={38} />
-                                        <Text
-                                            button
-                                            color={'secondary'}
-                                            style={{ marginTop: responsiveHeight(1) }}
-                                        >
-                                            {settings['settings'].name}
-                                        </Text>
-                                    </Block>
-                                </TouchableOpacity>
-                            </Block>
-                        </Block>
-                    </View>
+                        </View>
+                    </ScrollView>
                 </Block>
             </ImageBackground>
         </Block>
