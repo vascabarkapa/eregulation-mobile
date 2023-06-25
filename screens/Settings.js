@@ -57,7 +57,7 @@ const Settings = ({ navigation, settings }) => {
         setTimeout(() => {
             setIsSaving(false);
 
-            let toast = Toast.show('Saved Successfully', {
+            Toast.show('Saved Successfully', {
                 duration: Toast.durations.SHORT,
                 position: Toast.positions.BOTTOM,
                 shadow: true,
