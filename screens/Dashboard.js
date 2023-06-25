@@ -149,7 +149,7 @@ const Dashboard = ({ navigation, settings }) => {
                             <Block row space="around" style={{ marginVertical: responsiveHeight(2) }}>
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Temperature', { name: 'temperature' })}
+                                    onPress={() => navigation.navigate('Temperature')}
                                 >
                                     <Block center middle style={styles.button}>
                                         <TemperatureIcon size={38} />
@@ -165,7 +165,7 @@ const Dashboard = ({ navigation, settings }) => {
 
                                 <TouchableOpacity
                                     activeOpacity={0.8}
-                                    onPress={() => navigation.navigate('Humidity', { name: 'humidity' })}
+                                    onPress={() => navigation.navigate('Humidity')}
                                 >
                                     <Block center middle style={styles.button}>
                                         <HumidityIcon size={38} />
