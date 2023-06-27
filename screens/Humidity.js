@@ -146,8 +146,8 @@ const Humidity = ({ navigation, settings }) => {
                                 <Slider
                                     style={styles.slider}
                                     value={tempMinHumidity}
-                                    minimumValue={0}
-                                    maximumValue={100}
+                                    minimumValue={20}
+                                    maximumValue={90}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
@@ -164,8 +164,8 @@ const Humidity = ({ navigation, settings }) => {
                                 <Slider
                                     style={styles.slider}
                                     value={tempMaxHumidity}
-                                    minimumValue={0}
-                                    maximumValue={100}
+                                    minimumValue={20}
+                                    maximumValue={90}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
