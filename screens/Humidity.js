@@ -69,7 +69,7 @@ const Humidity = ({ navigation, settings }) => {
     };
 
     const turnOnOffHumidity = (value) => {
-        MqttService.send('eregulation', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'));
+        MqttService.send('eregulation/arduino', 'h-' + (isTurnedOnHumidityRegulation === true ? 'off' : 'on'));
         setIsTurnedOnHumidityRegulation(value => !value);
 
         Toast.show('Humidity regulation is ' + (isTurnedOnHumidityRegulation === true ? 'OFF' : 'ON'), {
@@ -83,7 +83,7 @@ const Humidity = ({ navigation, settings }) => {
     };
 
     const saveHumidityRange = () => {
-        MqttService.send('eregulation', 'h-' + tempMinHumidity + '-' + tempMaxHumidity);
+        MqttService.send('eregulation/arduino', 'h-' + tempMinHumidity + '-' + tempMaxHumidity);
 
         setMinHumidity(tempMinHumidity);
         setTempMinHumidity(tempMinHumidity);

@@ -69,7 +69,7 @@ const Temperature = ({ navigation, settings }) => {
     };
 
     const turnOnOffTemperature = (value) => {
-        MqttService.send('eregulation', 't-' + (isTurnedOnTemperatureRegulation === true ? 'off' : 'on'))
+        MqttService.send('eregulation/arduino', 't-' + (isTurnedOnTemperatureRegulation === true ? 'off' : 'on'))
         setIsTurnedOnTemperatureRegulation(value => !value);
 
         Toast.show('Temperature regulation is ' + (isTurnedOnTemperatureRegulation === true ? 'OFF' : 'ON'), {
@@ -83,7 +83,7 @@ const Temperature = ({ navigation, settings }) => {
     };
 
     const saveTemperatureRange = () => {
-        MqttService.send('eregulation', 't-' + tempMinTemperature + '-' + tempMaxTemperature);
+        MqttService.send('eregulation/arduino', 't-' + tempMinTemperature + '-' + tempMaxTemperature);
 
         setMinTemperature(tempMinTemperature);
         setTempMinTemperature(tempMinTemperature);

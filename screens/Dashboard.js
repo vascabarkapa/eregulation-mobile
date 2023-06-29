@@ -130,8 +130,18 @@ const Dashboard = ({ navigation, settings }) => {
         MqttService.connect(
             () => {
                 console.log('MQTT connected');
-                MqttService.subscribe('eregulation', onMessageArrived);
-                MqttService.send('eregulation', 'welcome');
+                MqttService.subscribe('eregulation/android', onMessageArrived);
+                MqttService.subscribe('eregulation/arduino', onMessageArrived);
+                MqttService.send('eregulation/arduino', 'welcome');
+
+                Toast.show('Connected to broker', {
+                    duration: 1000,
+                    position: -responsiveHeight(5),
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    backgroundColor: theme.colors.green
+                });
             },
             (error) => {
                 console.error('MQTT connection failed:', error);
@@ -139,7 +149,8 @@ const Dashboard = ({ navigation, settings }) => {
         );
 
         return () => {
-            MqttService.unsubscribe('eregulation');
+            MqttService.unsubscribe('eregulation/android');
+            MqttService.unsubscribe('eregulation/arduino');
             MqttService.client.disconnect();
         };
     }, []);
@@ -176,7 +187,7 @@ const Dashboard = ({ navigation, settings }) => {
         setRefreshing(true);
 
         setTimeout(() => {
-            MqttService.send('eregulation', 'ping');
+            MqttService.send('eregulation/arduino', 'ping');
             setRefreshing(false);
 
             Toast.show('Updated live data', {
