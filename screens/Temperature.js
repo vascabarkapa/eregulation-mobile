@@ -146,8 +146,8 @@ const Temperature = ({ navigation, settings }) => {
                                 <Slider
                                     style={styles.slider}
                                     value={tempMinTemperature}
-                                    minimumValue={12}
-                                    maximumValue={36}
+                                    minimumValue={0}
+                                    maximumValue={50}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
@@ -164,8 +164,8 @@ const Temperature = ({ navigation, settings }) => {
                                 <Slider
                                     style={styles.slider}
                                     value={tempMaxTemperature}
-                                    minimumValue={12}
-                                    maximumValue={36}
+                                    minimumValue={0}
+                                    maximumValue={50}
                                     thumbTintColor={theme.colors.primary}
                                     minimumTrackTintColor={theme.colors.primary}
                                     maximumTrackTintColor={theme.colors.gray2}
