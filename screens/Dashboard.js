@@ -96,7 +96,7 @@ const Dashboard = ({ navigation, settings }) => {
         };
 
         animate();
-    }, [opacityValue]);
+    }, [opacityValue, isTurnedOnHumidityRegulation, isTurnedOnTemperatureRegulation]);
 
     const checkDataFile = async () => {
         const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
