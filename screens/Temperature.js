@@ -107,7 +107,7 @@ const Temperature = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={isTurnedOnTemperatureRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOnTemperatureRegulation ? images.backgroundOpacity15 : images.backgroundOpacityFull} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
                         {isTurnedOnTemperatureRegulation ? <Animated.View style={{ opacity: opacityValue }}>
                             <TemperatureIcon size={responsiveHeight(55)} color={isTurnedOnTemperatureRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.4} />

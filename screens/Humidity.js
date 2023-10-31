@@ -107,7 +107,7 @@ const Humidity = ({ navigation, settings }) => {
             style={styles.container}
         >
             <Block style={styles.container}>
-                <ImageBackground source={isTurnedOnHumidityRegulation ? images.backgroundOpacity15 : null} style={styles.backgroundImage}>
+                <ImageBackground source={isTurnedOnHumidityRegulation ? images.backgroundOpacity15 : images.backgroundOpacityFull} style={styles.backgroundImage}>
                     <View style={styles.bottomIconContainer}>
                         {isTurnedOnHumidityRegulation ? <Animated.View style={{ opacity: opacityValue }}>
                             <HumidityIcon size={responsiveHeight(70)} color={isTurnedOnHumidityRegulation ? theme.colors.primary : theme.colors.secondary} opacity={0.4} />

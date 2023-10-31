@@ -7,6 +7,7 @@ export const splash = require('./assets/splash.png');
 export const backgroundOpacity5 = require('./assets/background_5.png');
 export const backgroundOpacity15 = require('./assets/background_15.png');
 export const backgroundOpacity30 = require('./assets/background_30.png');
+export const backgroundOpacityFull = require('./assets/background_full.png');
 
 export default {
     adaptiveIcon,
@@ -17,5 +18,6 @@ export default {
     splash,
     backgroundOpacity5,
     backgroundOpacity15,
-    backgroundOpacity30
+    backgroundOpacity30,
+    backgroundOpacityFull
 }
