@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Animated, Easing, View, TouchableOpacity } from 'react-native';
 import {
+    Animated,
+    Easing,
+    View,
     ImageBackground,
+    TouchableOpacity,
     KeyboardAvoidingView,
     StatusBar,
     StyleSheet,
@@ -10,10 +13,10 @@ import {
     responsiveHeight,
     responsiveWidth,
 } from "react-native-responsive-dimensions";
+import { Block, Text } from '../components';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
-import { Block, Text } from '../components';
 import MqttService from '../services/MqttService';
 import Toast from 'react-native-root-toast';
 

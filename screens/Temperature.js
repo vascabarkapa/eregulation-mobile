@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState, useContext } from 'react';
-import { Animated, Easing, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 import {
+    Animated,
+    Easing,
+    View,
     ImageBackground,
     KeyboardAvoidingView,
     StatusBar,
@@ -13,11 +15,11 @@ import {
     responsiveHeight,
     responsiveWidth,
 } from "react-native-responsive-dimensions";
+import { Block, Text } from '../components';
+import { GlobalContext } from '../contexts/GlobalContext';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
-import { Block, Text } from '../components';
-import { GlobalContext } from '../contexts/GlobalContext';
 import MqttService from '../services/MqttService';
 import Toast from 'react-native-root-toast';
 
