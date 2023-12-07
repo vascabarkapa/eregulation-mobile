@@ -16,20 +16,14 @@ import {
     responsiveHeight,
     responsiveWidth,
 } from "react-native-responsive-dimensions";
-import { useFocusEffect } from '@react-navigation/native';
 import { GlobalContext } from '../contexts/GlobalContext';
 import { Block, Text } from '../components';
-import * as FileSystem from 'expo-file-system';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
-import LiveDot from '../components/LiveDot';
 import MqttService from '../services/MqttService';
 import Regex from '../helpers/Regex';
 import Toast from 'react-native-root-toast';
-
-const FILE_NAME = 'systemData.json';
-const FILE_PATH = FileSystem.documentDirectory + FILE_NAME;
 
 const redirectToStatistics = () => {
     Linking.openURL('https://eregulation.netlify.app');
@@ -57,8 +51,6 @@ const Dashboard = ({ navigation, settings }) => {
     const SettingsIcon = settings['settings'].icon;
 
     const [refreshing, setRefreshing] = useState(false);
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
 
     const {
         liveTemperature,
@@ -97,34 +89,6 @@ const Dashboard = ({ navigation, settings }) => {
 
         animate();
     }, [opacityValue, isTurnedOnHumidityRegulation, isTurnedOnTemperatureRegulation]);
-
-    const checkDataFile = async () => {
-        const fileInfo = await FileSystem.getInfoAsync(FILE_PATH);
-
-        if (!fileInfo.exists) {
-            const initialData = {
-                first_name: 'New',
-                last_name: 'User',
-            };
-
-            const jsonString = JSON.stringify(initialData);
-            await FileSystem.writeAsStringAsync(FILE_PATH, jsonString);
-
-            const fileContent = await FileSystem.readAsStringAsync(FILE_PATH);
-            const jsonData = JSON.parse(fileContent);
-            setFirstName(jsonData.first_name);
-            setLastName(jsonData.last_name);
-        }
-
-        const fileContent = await FileSystem.readAsStringAsync(FILE_PATH);
-        const jsonData = JSON.parse(fileContent);
-        setFirstName(jsonData.first_name);
-        setLastName(jsonData.last_name);
-    };
-
-    useFocusEffect(() => {
-        checkDataFile();
-    });
 
     useEffect(() => {
         MqttService.connect(
@@ -216,8 +180,8 @@ const Dashboard = ({ navigation, settings }) => {
                         </Block>
 
                         <Block center column style={{ marginVertical: responsiveHeight(3.5) }}>
-                            <Text welcome>{greeting}</Text>
-                            <Text name>{(greeting && firstName && lastName) && (firstName + ' ' + lastName)}</Text>
+                            <Text name>{greeting}</Text>
+                            <Text welcome>Take control of your surroundings</Text>
                         </Block>
 
                         <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
@@ -281,22 +245,6 @@ const Dashboard = ({ navigation, settings }) => {
                                 <Block row space="around" style={{ marginVertical: responsiveHeight(1) }}>
                                     <TouchableOpacity
                                         activeOpacity={0.8}
-                                        onPress={redirectToStatistics}
-                                    >
-                                        <Block center middle style={styles.button}>
-                                            <StatisticsIcon size={42} />
-                                            <Text
-                                                button
-                                                color={'secondary'}
-                                                style={{ marginTop: responsiveHeight(1) }}
-                                            >
-                                                {settings['statistics'].name}
-                                            </Text>
-                                        </Block>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity
-                                        activeOpacity={0.8}
                                         onPress={() => navigation.navigate('Settings', { name: 'settings' })}
                                     >
                                         <Block center middle style={styles.button}>
@@ -307,6 +255,22 @@ const Dashboard = ({ navigation, settings }) => {
                                                 style={{ marginTop: responsiveHeight(1) }}
                                             >
                                                 {settings['settings'].name}
+                                            </Text>
+                                        </Block>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity
+                                        activeOpacity={0.8}
+                                        onPress={redirectToStatistics}
+                                    >
+                                        <Block center middle style={styles.button}>
+                                            <StatisticsIcon size={42} />
+                                            <Text
+                                                button
+                                                color={'secondary'}
+                                                style={{ marginTop: responsiveHeight(1) }}
+                                            >
+                                                {settings['statistics'].name}
                                             </Text>
                                         </Block>
                                     </TouchableOpacity>
