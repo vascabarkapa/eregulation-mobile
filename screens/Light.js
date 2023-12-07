@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     },
     bottomIconContainer: {
         position: 'absolute',
-        bottom: -responsiveHeight(15),
+        bottom: -responsiveHeight(10),
         right: -responsiveWidth(15),
     },
 })
