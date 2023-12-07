@@ -48,7 +48,7 @@ const Dashboard = ({ navigation, settings }) => {
     const TemperatureIcon = settings['temperature'].icon;
     const HumidityIcon = settings['humidity'].icon;
     const StatisticsIcon = settings['statistics'].icon;
-    const SettingsIcon = settings['settings'].icon;
+    const LightIcon = settings['light'].icon;
 
     const [refreshing, setRefreshing] = useState(false);
 
@@ -245,16 +245,16 @@ const Dashboard = ({ navigation, settings }) => {
                                 <Block row space="around" style={{ marginVertical: responsiveHeight(1) }}>
                                     <TouchableOpacity
                                         activeOpacity={0.8}
-                                        onPress={() => navigation.navigate('Settings', { name: 'settings' })}
+                                        onPress={() => navigation.navigate('Light')}
                                     >
                                         <Block center middle style={styles.button}>
-                                            <SettingsIcon size={42} />
+                                            <LightIcon size={42} />
                                             <Text
                                                 button
                                                 color={'secondary'}
                                                 style={{ marginTop: responsiveHeight(1) }}
                                             >
-                                                {settings['settings'].name}
+                                                {settings['light'].name}
                                             </Text>
                                         </Block>
                                     </TouchableOpacity>
