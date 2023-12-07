@@ -14,6 +14,8 @@ import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import { Block, Text } from '../components';
+import MqttService from '../services/MqttService';
+import Toast from 'react-native-root-toast';
 
 const Light = ({ navigation, settings }) => {
     const LightIcon = settings['light'].icon;
@@ -23,6 +25,17 @@ const Light = ({ navigation, settings }) => {
 
     const handleOption = (button) => {
         setOption(button);
+
+        MqttService.send('eregulation/arduino', 'l-' + button);
+
+        Toast.show('Light is ' + button.toUpperCase(), {
+            duration: 500,
+            position: -responsiveHeight(5),
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            backgroundColor: theme.colors.green
+        });
     };
 
     useEffect(() => {
