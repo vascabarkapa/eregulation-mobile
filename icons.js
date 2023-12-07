@@ -9,7 +9,7 @@ export default {
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.secondary}
-                name="white-balance-sunny"
+                name="thermometer-lines"
                 {...props}
             />
         ),
@@ -36,24 +36,13 @@ export default {
             />
         ),
     },
-    'settings': {
-        name: 'Settings',
+    'light': {
+        name: 'Light',
         icon: ({ size, color, ...props }) => (
             <MaterialCommunityIcons
                 size={size || theme.sizes.font}
                 color={color || theme.colors.secondary}
-                name="cog"
-                {...props}
-            />
-        ),
-    },
-    'wifi': {
-        name: 'WiFi',
-        icon: ({ size, color, ...props }) => (
-            <MaterialCommunityIcons
-                size={size || theme.sizes.font}
-                color={color || theme.colors.secondary}
-                name="wifi-cog"
+                name="lightbulb-on"
                 {...props}
             />
         ),
