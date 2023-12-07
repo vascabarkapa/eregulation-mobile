@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     black: { color: theme.colors.black },
     white: { color: theme.colors.white },
     gray: { color: theme.colors.gray },
+    primary: { color: theme.colors.primary },
     secondary: { color: theme.colors.secondary },
     welcome: {
         fontSize: responsiveFontSize(3),
