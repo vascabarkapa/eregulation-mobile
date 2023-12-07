@@ -1,11 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, View, TouchableOpacity } from 'react-native';
 import {
     ImageBackground,
     KeyboardAvoidingView,
     StatusBar,
     StyleSheet,
-
 } from 'react-native';
 import {
     responsiveHeight,
@@ -19,6 +18,12 @@ import { Block, Text } from '../components';
 const Light = ({ navigation, settings }) => {
     const LightIcon = settings['light'].icon;
     const opacityValue = useRef(new Animated.Value(1)).current;
+
+    const [option, setOption] = useState('off');
+
+    const handleOption = (button) => {
+        setOption(button);
+    };
 
     useEffect(() => {
         const animate = () => {
@@ -60,7 +65,53 @@ const Light = ({ navigation, settings }) => {
                             <Text h2 bold style>Light</Text>
                         </Block>
                         <Block center style={{ paddingVertical: responsiveHeight(6) }}>
-                            <Text>Coming soon!</Text>
+                            <Block row space="around" style={{ marginVertical: responsiveHeight(2) }}>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{ width: 100, marginRight: 5 }}
+                                    onPress={() => handleOption('on')}
+                                >
+                                    <Block center middle style={option === 'on' ? styles.activeButton : styles.button}>
+                                        <Text
+                                            button
+                                            color={option === 'on' ? 'primary' : 'secondary'}
+                                            style={{ marginTop: responsiveHeight(1), fontSize: 20 }}
+                                        >
+                                            ON
+                                        </Text>
+                                    </Block>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{ width: 100, marginRight: 5 }}
+                                    onPress={() => handleOption('off')}
+                                >
+                                    <Block center middle style={option === 'off' ? styles.activeButton : styles.button}>
+                                        <Text
+                                            button
+                                            color={option === 'off' ? 'primary' : 'secondary'}
+                                            style={{ marginTop: responsiveHeight(1), fontSize: 20 }}
+                                        >
+                                            OFF
+                                        </Text>
+                                    </Block>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    activeOpacity={0.8}
+                                    style={{ width: 100 }}
+                                    onPress={() => handleOption('auto')}
+                                >
+                                    <Block center middle style={option === 'auto' ? styles.activeButton : styles.button}>
+                                        <Text
+                                            button
+                                            color={option === 'auto' ? 'primary' : 'secondary'}
+                                            style={{ marginTop: responsiveHeight(1), fontSize: 20 }}
+                                        >
+                                            AUTO
+                                        </Text>
+                                    </Block>
+                                </TouchableOpacity>
+                            </Block>
                         </Block>
                     </Block>
                 </ImageBackground>
@@ -103,10 +154,20 @@ const styles = StyleSheet.create({
         paddingHorizontal: responsiveHeight(1.5),
     },
     button: {
-        marginTop: responsiveHeight(1),
         backgroundColor: theme.colors.primary,
         width: '100%',
+        height: 100,
         padding: theme.sizes.base,
+        borderRadius: responsiveHeight(1.5) / 2,
+        textAlign: 'center'
+    },
+    activeButton: {
+        backgroundColor: theme.colors.secondary,
+        width: '100%',
+        height: 100,
+        padding: theme.sizes.base,
+        borderColor: theme.colors.primary,
+        borderWidth: 1,
         borderRadius: responsiveHeight(1.5) / 2,
         textAlign: 'center'
     },
