@@ -125,7 +125,7 @@ const Dashboard = ({ navigation, settings }) => {
         console.log('Received message:', message.payloadString);
 
         const liveDataRegex = /^t-\d+-h-\d+-l-\d+$/;
-        const configDataRegex = /^t-\d+-\d+-\d+-\d+-h-\d+-\d+-\d+-\d+$/;
+        const configDataRegex = /^t-\d+-\d+-\d+-\d+-h-\d+-\d+-\d+-\d+-l-\d+$/;
 
         if (configDataRegex.test(message.payloadString)) {
             const parsedConfigData = Regex.parseConfigData(message.payloadString);
@@ -139,6 +139,8 @@ const Dashboard = ({ navigation, settings }) => {
             setIsTurnedOnHumidityRegulation(parsedConfigData.isTurnedOnHumidityRegulation === 1 ? true : false);
             setMinHumidity(parsedConfigData.minHumidity);
             setMaxHumidity(parsedConfigData.maxHumidity);
+
+            setLiveLight(parsedConfigData.liveTemperature);
         }
 
         if (liveDataRegex.test(message.payloadString)) {

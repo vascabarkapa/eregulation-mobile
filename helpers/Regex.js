@@ -11,6 +11,8 @@ function parseConfigData(message) {
   const minHumidity = parseInt(values[8]);
   const maxHumidity = parseInt(values[9]);
 
+  const liveLight = parseInt(values[11]);
+
   return {
     liveTemperature,
     isTurnedOnTemperatureRegulation,
