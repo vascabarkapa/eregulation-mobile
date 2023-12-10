@@ -57,6 +57,8 @@ const Dashboard = ({ navigation, settings }) => {
         setLiveTemperature,
         liveHumidity,
         setLiveHumidity,
+        liveLight,
+        setLiveLight,
         setMinTemperature,
         setMaxTemperature,
         setMinHumidity,
@@ -122,7 +124,7 @@ const Dashboard = ({ navigation, settings }) => {
     const onMessageArrived = (message) => {
         console.log('Received message:', message.payloadString);
 
-        const liveDataRegex = /^t-\d+-h-\d+$/;
+        const liveDataRegex = /^t-\d+-h-\d+-l-\d+$/;
         const configDataRegex = /^t-\d+-\d+-\d+-\d+-h-\d+-\d+-\d+-\d+$/;
 
         if (configDataRegex.test(message.payloadString)) {
@@ -140,10 +142,11 @@ const Dashboard = ({ navigation, settings }) => {
         }
 
         if (liveDataRegex.test(message.payloadString)) {
-            const parsedLiveData = Regex.parseLiveTemperatureAndHumidity(message.payloadString);
+            const parsedLiveData = Regex.parseLiveData(message.payloadString);
 
             setLiveTemperature(parsedLiveData.temperature);
             setLiveHumidity(parsedLiveData.humidity);
+            setLiveLight(parsedLiveData.light);
         }
     };
 

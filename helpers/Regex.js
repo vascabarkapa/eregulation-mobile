@@ -23,20 +23,22 @@ function parseConfigData(message) {
   };
 }
 
-function parseLiveTemperatureAndHumidity(message) {
+function parseLiveData(message) {
   const values = message.split("-");
   const temperature = values[1];
   const humidity = values[3];
+  const light = values[5];
 
   return {
     temperature,
-    humidity
+    humidity,
+    light
   };
 }
 
 const Regex = {
   parseConfigData,
-  parseLiveTemperatureAndHumidity
+  parseLiveData
 }
 
 export default Regex;
