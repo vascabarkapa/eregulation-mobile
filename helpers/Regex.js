@@ -21,7 +21,8 @@ function parseConfigData(message) {
     liveHumidity,
     isTurnedOnHumidityRegulation,
     minHumidity,
-    maxHumidity
+    maxHumidity,
+    liveLight
   };
 }
 
