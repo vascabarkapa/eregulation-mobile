@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
     Animated,
     Easing,
@@ -14,20 +14,49 @@ import {
     responsiveWidth,
 } from "react-native-responsive-dimensions";
 import { Block, Text } from '../components';
+import { GlobalContext } from '../contexts/GlobalContext';
 import * as theme from '../styles';
 import * as images from '../images';
 import mocks from '../icons';
 import MqttService from '../services/MqttService';
 import Toast from 'react-native-root-toast';
 
+const OFF = 0;
+const ON = 1;
+const AUTO = 2;
+
+function setButtonState(stateId) {
+    switch (stateId) {
+        case OFF:
+            return 'off';
+        case ON:
+            return 'on';
+        case AUTO:
+            return 'auto';
+    }
+}
+
 const Light = ({ navigation, settings }) => {
     const LightIcon = settings['light'].icon;
+    const { liveLight, setLiveLight } = useContext(GlobalContext);
     const opacityValue = useRef(new Animated.Value(1)).current;
 
-    const [option, setOption] = useState('off');
+    const [option, setOption] = useState(setButtonState(liveLight));
 
     const handleOption = (button) => {
         setOption(button);
+
+        switch (button) {
+            case "off":
+                setLiveLight(OFF);
+                break;
+            case "on":
+                setLiveLight(ON);
+                break;
+            case "auto":
+                setLiveLight(AUTO);
+                break;
+        }
 
         MqttService.send('eregulation/arduino', 'l-' + button);
 
