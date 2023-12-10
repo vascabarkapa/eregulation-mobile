@@ -5,6 +5,7 @@ export const GlobalContext = createContext();
 export const GlobalProvider = ({ children }) => {
     const [liveTemperature, setLiveTemperature] = useState(0);
     const [liveHumidity, setLiveHumidity] = useState(0);
+    const [liveLight, setLiveLight] = useState(0);
 
     const [minTemperature, setMinTemperature] = useState(18);
     const [maxTemperature, setMaxTemperature] = useState(24);
@@ -23,6 +24,8 @@ export const GlobalProvider = ({ children }) => {
                 setLiveTemperature,
                 liveHumidity,
                 setLiveHumidity,
+                liveLight,
+                setLiveLight,
                 minTemperature,
                 setMinTemperature,
                 maxTemperature,
