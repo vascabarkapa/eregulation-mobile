@@ -140,7 +140,7 @@ const Dashboard = ({ navigation, settings }) => {
             setMinHumidity(parsedConfigData.minHumidity);
             setMaxHumidity(parsedConfigData.maxHumidity);
 
-            setLiveLight(parsedConfigData.liveTemperature);
+            setLiveLight(parsedConfigData.liveLight);
         }
 
         if (liveDataRegex.test(message.payloadString)) {
@@ -252,11 +252,11 @@ const Dashboard = ({ navigation, settings }) => {
                                         activeOpacity={0.8}
                                         onPress={() => navigation.navigate('Light')}
                                     >
-                                        <Block center middle style={styles.button}>
-                                            <LightIcon size={42} />
+                                        <Block center middle style={liveLight === 0 ? styles.button : styles.activeButton}>
+                                            <LightIcon size={42} color={liveLight === 0 ? theme.colors.secondary : theme.colors.primary} />
                                             <Text
                                                 button
-                                                color={'secondary'}
+                                                color={liveLight === 0 ? 'secondary' : 'primary'}
                                                 style={{ marginTop: responsiveHeight(1) }}
                                             >
                                                 {settings['light'].name}
@@ -316,6 +316,14 @@ const styles = StyleSheet.create({
         width: responsiveWidth(38),
         height: responsiveWidth(38),
         borderRadius: responsiveWidth(38) / 10,
+    },
+    activeButton: {
+        backgroundColor: theme.colors.secondary,
+        width: responsiveWidth(38),
+        height: responsiveWidth(38),
+        borderRadius: responsiveWidth(38) / 10,
+        borderWidth: 1,
+        borderColor: theme.colors.primary,
     },
     container: {
         flex: 1,
