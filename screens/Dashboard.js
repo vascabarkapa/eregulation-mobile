@@ -186,7 +186,7 @@ const Dashboard = ({ navigation, settings }) => {
 
                         <Block center column style={{ marginVertical: responsiveHeight(3.5) }}>
                             <Text name>{greeting}</Text>
-                            <Text welcome>Take control of your surroundings</Text>
+                            <Text welcome center>Take control of your surroundings</Text>
                         </Block>
 
                         <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
