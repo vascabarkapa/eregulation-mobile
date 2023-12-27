@@ -124,7 +124,7 @@ const Dashboard = ({ navigation, settings }) => {
     const onMessageArrived = (message) => {
         console.log('Received message:', message.payloadString);
 
-        const liveDataRegex = /^t-\d+-h-\d+-l-\d+$/;
+        const liveDataRegex = /^t-([\d.]+)-h-([\d.]+)-l-\d+$/;
         const configDataRegex = /^t-\d+-\d+-\d+-\d+-h-\d+-\d+-\d+-\d+-l-\d+$/;
 
         if (configDataRegex.test(message.payloadString)) {

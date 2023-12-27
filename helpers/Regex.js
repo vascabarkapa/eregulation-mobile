@@ -28,8 +28,8 @@ function parseConfigData(message) {
 
 function parseLiveData(message) {
   const values = message.split("-");
-  const temperature = values[1];
-  const humidity = values[3];
+  const temperature = Math.round(values[1]);
+  const humidity = Math.round(values[3]);
   const light = values[5];
 
   return {
