@@ -10,6 +10,7 @@ import {
     StyleSheet,
     Switch,
     TouchableOpacity,
+    Platform,
 } from 'react-native';
 import {
     responsiveHeight,

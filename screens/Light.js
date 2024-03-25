@@ -8,6 +8,7 @@ import {
     KeyboardAvoidingView,
     StatusBar,
     StyleSheet,
+    Platform,
 } from 'react-native';
 import {
     responsiveHeight,
