@@ -16,7 +16,7 @@
     "expo": "^50.0.2",
     "expo-file-system": "~16.0.4",
     "expo-status-bar": "~1.11.1",
-    "expo-updates": "^0.24.12",
+    "expo-updates": "~0.24.12",
     "paho-mqtt": "^1.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
