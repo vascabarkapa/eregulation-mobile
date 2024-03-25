@@ -4,8 +4,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "expo": "^50.0.2",
     "expo-file-system": "~16.0.4",
     "expo-status-bar": "~1.11.1",
+    "expo-system": "^0.0.0",
     "expo-updates": "~0.24.12",
     "paho-mqtt": "^1.1.0",
     "react": "18.2.0",
@@ -26,7 +27,8 @@
     "react-native-root-toast": "^3.4.1",
     "react-native-svg": "14.1.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "ui": "^0.2.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
