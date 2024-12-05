@@ -123,7 +123,7 @@ const Temperature = ({ navigation, settings = mocks }) => {
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{liveTemperature}</Text>
+                                <Text live paddingRight2 style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>{liveTemperature}</Text>
                                 <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={-2} style={!isTurnedOnTemperatureRegulation && { color: theme.colors.secondary }}>°C</Text>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>

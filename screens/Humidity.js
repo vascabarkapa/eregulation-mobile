@@ -123,7 +123,7 @@ const Humidity = ({ navigation, settings = mocks }) => {
                         </Block>
                         <Block row style={{ paddingVertical: responsiveHeight(6) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end' }}>
-                                <Text live style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>{liveHumidity}</Text>
+                                <Text live paddingRight2 style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>{liveHumidity}</Text>
                                 <Text h1 size={responsiveHeight(6)} height={responsiveHeight(10)} weight='600' spacing={0.1} style={!isTurnedOnHumidityRegulation && { color: theme.colors.secondary }}>%</Text>
                             </Block>
                             <Block flex={2} style={{ alignItems: 'center', marginTop: responsiveHeight(1) }}>
