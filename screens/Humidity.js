@@ -24,7 +24,7 @@ import mocks from '../icons';
 import MqttService from '../services/MqttService';
 import Toast from 'react-native-root-toast';
 
-const Humidity = ({ navigation, settings }) => {
+const Humidity = ({ navigation, settings = mocks }) => {
     const HumidityIcon = settings['humidity'].icon;
     const {
         liveHumidity,
@@ -202,9 +202,9 @@ const Humidity = ({ navigation, settings }) => {
     )
 }
 
-Humidity.defaultProps = {
+/* Humidity.defaultProps = {
     settings: mocks,
-};
+}; */
 
 
 export default Humidity;

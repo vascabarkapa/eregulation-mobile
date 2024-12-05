@@ -24,7 +24,7 @@ import mocks from '../icons';
 import MqttService from '../services/MqttService';
 import Toast from 'react-native-root-toast';
 
-const Temperature = ({ navigation, settings }) => {
+const Temperature = ({ navigation, settings = mocks }) => {
     const TemperatureIcon = settings['temperature'].icon;
     const {
         liveTemperature,
@@ -202,9 +202,9 @@ const Temperature = ({ navigation, settings }) => {
     )
 }
 
-Temperature.defaultProps = {
+/* Temperature.defaultProps = {
     settings: mocks,
-};
+}; */
 
 
 export default Temperature;

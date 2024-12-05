@@ -40,7 +40,7 @@ const getGreeting = () => {
     }
 };
 
-const Dashboard = ({ navigation, settings }) => {
+const Dashboard = ({ navigation, settings = mocks }) => {
     const greeting = getGreeting();
 
     const opacityValue = useRef(new Animated.Value(1)).current;
@@ -191,14 +191,14 @@ const Dashboard = ({ navigation, settings }) => {
 
                         <Block row style={{ paddingVertical: responsiveHeight(1.5), marginHorizontal: responsiveHeight(1.5) }}>
                             <Block flex={2} row style={{ alignItems: 'flex-end', }}>
-                                <Text h1>{liveTemperature}</Text>
+                                <Text h1 paddingRight1>{liveTemperature}</Text>
                                 <Block column>
                                     {/* <LiveDot /> */}
                                     <Text h1 size={34} height={80} weight='600' spacing={-2}>°C</Text>
                                 </Block>
                             </Block>
                             <Block flex={2} row right style={{ alignItems: 'flex-end', }}>
-                                <Text h1>{liveHumidity}</Text>
+                                <Text h1 paddingRight1>{liveHumidity}</Text>
                                 <Block column>
                                     {/* <LiveDot /> */}
                                     <Text h1 size={34} height={80} weight='600' spacing={-2}>%</Text>
@@ -289,9 +289,9 @@ const Dashboard = ({ navigation, settings }) => {
     );
 };
 
-Dashboard.defaultProps = {
+/* Dashboard.defaultProps = {
     settings: mocks,
-};
+}; */
 
 export default Dashboard;
 

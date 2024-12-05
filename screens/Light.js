@@ -37,7 +37,7 @@ function setButtonState(stateId) {
     }
 }
 
-const Light = ({ navigation, settings }) => {
+const Light = ({ navigation, settings = mocks }) => {
     const LightIcon = settings['light'].icon;
     const { liveLight, setLiveLight } = useContext(GlobalContext);
     const opacityValue = useRef(new Animated.Value(1)).current;
@@ -166,9 +166,9 @@ const Light = ({ navigation, settings }) => {
     )
 }
 
-Light.defaultProps = {
+/* Light.defaultProps = {
     settings: mocks,
-};
+}; */
 
 
 export default Light;
