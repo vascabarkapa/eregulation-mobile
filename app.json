@@ -5,6 +5,7 @@
     "privacy": "public",
     "description": "Take control of your surroundings with eRegulation: Your smart solution for sensor regulation.",
     "version": "0.0.1",
+    "newArchEnabled": true,
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -39,9 +40,6 @@
     },
     "updates": {
       "url": "https://u.expo.dev/b55fde65-3671-461a-8778-50d471372359"
-    },
-    "expo": {
-      "newArchEnabled": true
     }
   }
 }
