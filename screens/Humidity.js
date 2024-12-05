@@ -202,11 +202,6 @@ const Humidity = ({ navigation, settings = mocks }) => {
     )
 }
 
-/* Humidity.defaultProps = {
-    settings: mocks,
-}; */
-
-
 export default Humidity;
 
 const styles = StyleSheet.create({

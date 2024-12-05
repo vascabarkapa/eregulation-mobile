@@ -289,10 +289,6 @@ const Dashboard = ({ navigation, settings = mocks }) => {
     );
 };
 
-/* Dashboard.defaultProps = {
-    settings: mocks,
-}; */
-
 export default Dashboard;
 
 const styles = StyleSheet.create({

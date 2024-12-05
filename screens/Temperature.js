@@ -202,11 +202,6 @@ const Temperature = ({ navigation, settings = mocks }) => {
     )
 }
 
-/* Temperature.defaultProps = {
-    settings: mocks,
-}; */
-
-
 export default Temperature;
 
 const styles = StyleSheet.create({

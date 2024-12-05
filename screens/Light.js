@@ -166,11 +166,6 @@ const Light = ({ navigation, settings = mocks }) => {
     )
 }
 
-/* Light.defaultProps = {
-    settings: mocks,
-}; */
-
-
 export default Light;
 
 const styles = StyleSheet.create({
