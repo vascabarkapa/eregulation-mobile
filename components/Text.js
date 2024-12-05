@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text } from 'react-native'
 import {
-    responsiveFontSize
+    responsiveFontSize,
+    responsiveWidth
 } from "react-native-responsive-dimensions";
 import * as theme from '../styles';
 
@@ -28,6 +29,8 @@ export default class Typography extends Component {
             button,
             style,
             children,
+            paddingRight1,
+            paddingRight2,
             ...props
         } = this.props;
 
@@ -55,6 +58,8 @@ export default class Typography extends Component {
             height && { lineHeight: height },
             weight && { fontWeight: weight },
             spacing && { letterSpacing: spacing },
+            paddingRight1 && styles.paddingRight1,
+            paddingRight2 && styles.paddingRight2,
             style
         ];
 
@@ -124,4 +129,10 @@ const styles = StyleSheet.create({
         letterSpacing: -0.6,
         lineHeight: theme.sizes.welcome + 4,
     },
+    paddingRight1: {
+        paddingRight: responsiveWidth(1)
+    },
+    paddingRight2: {
+        paddingRight: responsiveWidth(2)
+    }
 });
